@@ -371,6 +371,7 @@ h1, h2, h3, h4, h5, h6 {
 /* ── Categories ───────────────────────────────────── */
 .categories-section { padding: 6rem 0; background: #E6E4DD; }
 .categories-cloud { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 900px; margin: 0 auto; }
+.category-row { display: contents; }
 .category-pill {
   padding: 0.6rem 1.4rem;
   background: #fff;
@@ -388,6 +389,10 @@ h1, h2, h3, h4, h5, h6 {
   border-color: rgba(118,75,162,0.25);
   color: var(--accent-purple);
   font-weight: 600;
+}
+@media (min-width: 1200px) {
+  .categories-cloud { flex-direction: column; align-items: center; gap: 14px; max-width: 960px; }
+  .category-row { display: flex; gap: 12px; justify-content: center; width: 100%; }
 }
 
 /* ── For Mentors ──────────────────────────────────── */
@@ -634,15 +639,29 @@ h1, h2, h3, h4, h5, h6 {
 /* ── Mobile ───────────────────────────────────────── */
 @media (max-width: 900px) {
   .logo img { height: 70px; }
+  .footer-logo { height: 70px; }
+  .footer-logo { height: 70px; }
   .hero-section { padding-top: 8rem; }
   .hero-section h1 { font-size: 2.5rem; }
   .for-mentors-section h2 { font-size: 2rem; }
   .founding-card h2 { font-size: 2rem; }
   .contact-title { font-size: 2rem; }
   .stat-divider { display: none; }
+  .hero-floating-ui { transform: scale(0.82); transform-origin: top center; }
+}
+@media (max-width: 767px) {
+  .how-it-works-section, .capabilities-section, .categories-section,
+  .for-mentors-section, .founding-section, .contact-section { padding: 3.5rem 0; }
+  .step-card, .capability-card { padding: 1.5rem; }
+  .glass-card { padding: 1.5rem; }
+  .founding-perk { padding: 1.25rem; }
+  .section-title { font-size: 2rem; }
 }
 @media (max-width: 576px) {
+  .hero-section { padding-top: 7rem; }
   .hero-section h1 { font-size: 2rem; }
   .hero-floating-ui { display: none; }
   .btn-hero-primary, .btn-hero-ghost { width: 100%; justify-content: center; }
+  .categories-cloud { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .category-pill { width: 100%; text-align: center; padding: 0.6rem 0.5rem; }
 }

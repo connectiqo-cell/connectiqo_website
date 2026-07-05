@@ -23,8 +23,14 @@ const categories = [
   { label: 'Career Coaching', highlight: true },
 ]
 
+const ROW_SIZE = 4
+
 export default function Categories() {
   const ref = useRef()
+
+  const rows = []
+  for (let i = 0; i < categories.length; i += ROW_SIZE) rows.push(categories.slice(i, i + ROW_SIZE))
+  const mid = (rows.length - 1) / 2
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -45,10 +51,18 @@ export default function Categories() {
         </div>
 
         <div className="categories-cloud animate-on-scroll">
-          {categories.map((c, i) => (
-            <span key={i} className={`category-pill ${c.highlight ? 'highlight' : ''}`}>
-              {c.label}
-            </span>
+          {rows.map((row, ri) => (
+            <div
+              key={ri}
+              className="category-row"
+              style={{ transform: `translateX(${(mid - Math.abs(ri - mid)) * 28}px)` }}
+            >
+              {row.map(c => (
+                <span key={c.label} className={`category-pill ${c.highlight ? 'highlight' : ''}`}>
+                  {c.label}
+                </span>
+              ))}
+            </div>
           ))}
         </div>
       </div>
