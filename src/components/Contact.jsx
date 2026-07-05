@@ -40,7 +40,7 @@ export default function Contact() {
 
             <div className="detail-item">
               <h4>Email</h4>
-              <a href="mailto:hello@connectiqo.com">hello@connectiqo.com</a>
+              <a href="mailto:contact@connectiqo.com">contact@connectiqo.com</a>
             </div>
             <div className="detail-item">
               <h4>Based In</h4>
