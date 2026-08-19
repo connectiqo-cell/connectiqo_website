@@ -85,7 +85,7 @@ export default function Features() {
     <section className="capabilities-section" id="features" ref={ref}>
       <div className="container">
         <div className="animate-on-scroll">
-          <p className="text-center mb-2" style={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', fontSize: '0.8rem', color: '#764BA2' }}>Platform Capabilities</p>
+          <p className="text-center mb-2" style={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', fontSize: '0.8rem', color: '#6D4AFF' }}>Platform Capabilities</p>
           <h2 className="section-title">Everything You Need to Learn Better</h2>
           <p className="section-subtitle">Built for real knowledge transfer between real people.</p>
         </div>

@@ -49,7 +49,7 @@ export default function HowItWorks() {
     <section className="how-it-works-section" id="how-it-works" ref={ref}>
       <div className="container">
         <div className="animate-on-scroll">
-          <p className="text-center mb-2" style={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', fontSize: '0.8rem', color: '#764BA2' }}>Simple Process</p>
+          <p className="text-center mb-2" style={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', fontSize: '0.8rem', color: '#6D4AFF' }}>Simple Process</p>
           <h2 className="section-title">How Connectiqo Works</h2>
           <p className="section-subtitle">Three steps from curiosity to clarity.</p>
         </div>

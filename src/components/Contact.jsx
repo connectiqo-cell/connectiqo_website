@@ -1,5 +1,12 @@
 import { useState } from 'react'
 
+const SOCIAL_LINKS = [
+  { label: 'IN', name: 'LinkedIn', href: 'https://www.linkedin.com/company/connectiqo-co/' },
+  { label: 'X', name: 'X (Twitter)', href: 'https://x.com/connectiqo' },
+  { label: 'IG', name: 'Instagram', href: 'https://www.instagram.com/connectiqo?utm_source=qr&igsh=bTR4ZWVuanZ2aDdl' },
+  { label: 'YT', name: 'YouTube', href: 'https://youtube.com/@connectiqo?si=gcrPjl-Kdw4i_FM7' },
+]
+
 export default function Contact() {
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -31,11 +38,11 @@ export default function Contact() {
           {/* Left */}
           <div className="col-lg-5">
             <h2 className="contact-title">
-              Join the<br />
-              <span className="text-gradient">Waitlist.</span>
+              Contact<br />
+              <span className="text-gradient">Us.</span>
             </h2>
             <p style={{ color: '#666', lineHeight: 1.8, marginBottom: '2rem' }}>
-              Connectiqo is currently in early access. Drop your details and we'll reach out when a spot opens — whether you're looking to learn or to mentor.
+              Have a question, feedback, or just want to say hello? Fill out the form and our team will get back to you.
             </p>
 
             <div className="detail-item">
@@ -48,8 +55,8 @@ export default function Contact() {
             </div>
 
             <div className="social-links">
-              {['in', 'tw', 'ig'].map(s => (
-                <a key={s} href="#" className="social-link">{s.toUpperCase()}</a>
+              {SOCIAL_LINKS.map(s => (
+                <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" className="social-link" aria-label={s.name}>{s.label}</a>
               ))}
             </div>
           </div>
@@ -60,45 +67,31 @@ export default function Contact() {
               {sent ? (
                 <div className="text-center py-4">
                   <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✓</div>
-                  <h3 style={{ marginBottom: '0.5rem' }}>You're on the list!</h3>
-                  <p style={{ color: '#666' }}>We'll be in touch soon. Thanks for your interest in Connectiqo.</p>
+                  <h3 style={{ marginBottom: '0.5rem' }}>Message Sent!</h3>
+                  <p style={{ color: '#666' }}>Thanks for reaching out. We'll get back to you soon.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="contact-form">
-                  <div className="row g-3">
-                    <div className="col-sm-6">
-                      <div className="form-group">
-                        <label>First Name *</label>
-                        <input type="text" name="firstName" required placeholder="Rahul" />
-                      </div>
-                    </div>
-                    <div className="col-sm-6">
-                      <div className="form-group">
-                        <label>Last Name</label>
-                        <input type="text" name="lastName" placeholder="Kumar" />
-                      </div>
-                    </div>
+                  <div className="form-group">
+                    <label>Name *</label>
+                    <input type="text" name="name" required placeholder="Enter your name" />
                   </div>
                   <div className="form-group">
-                    <label>Email Address *</label>
-                    <input type="email" name="email" required placeholder="rahul@example.com" />
+                    <label>Email *</label>
+                    <input type="email" name="email" required placeholder="Enter your email" />
                   </div>
                   <div className="form-group">
-                    <label>I want to join as</label>
-                    <select name="role" style={{ width: '100%', padding: '0.75rem 1rem', border: '1px solid #e0e0e0', borderRadius: 10, fontFamily: 'inherit', fontSize: '0.95rem', background: '#fff' }}>
-                      <option value="learner">Learner — I want to find a mentor</option>
-                      <option value="mentor">Mentor — I want to share my knowledge</option>
-                      <option value="both">Both</option>
-                    </select>
+                    <label>Contact</label>
+                    <input type="tel" name="contact" placeholder="Enter your contact number" />
                   </div>
                   <div className="form-group">
-                    <label>Anything you'd like us to know?</label>
-                    <textarea name="message" rows="3" placeholder="What skills are you looking to learn or teach?" />
+                    <label>Query / Message</label>
+                    <textarea name="message" rows="3" placeholder="Write your message here" />
                   </div>
                   <button type="submit" className="btn-submit" disabled={loading}>
                     {loading ? 'Sending…' : (
                       <>
-                        Join the Waitlist
+                        Send Message
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                       </>
                     )}

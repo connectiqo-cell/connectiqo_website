@@ -1,4 +1,10 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+
+const NAV_LINKS = [
+  { href: '#categories', label: 'Categories' },
+  { href: '#how-it-works', label: 'How It Works' },
+]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -14,20 +20,25 @@ export default function Navbar() {
     <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <div className="d-flex align-items-center justify-content-between">
-          <a href="#hero" className="logo">
-            <img src="/logo.png" alt="Connectiqo" />
-          </a>
+          <Link to="/" className="logo logo-text">
+            Connect<span className="logo-accent">iqo</span>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="d-none d-lg-flex align-items-center gap-4">
-            <a href="#how-it-works" className="nav-link">How It Works</a>
-            <a href="#features" className="nav-link">Features</a>
-            <a href="#categories" className="nav-link">Categories</a>
-            <a href="#for-mentors" className="nav-link">For Mentors</a>
+            {NAV_LINKS.map(link => (
+              <a key={link.href} href={link.href} className="nav-link">{link.label}</a>
+            ))}
           </nav>
 
           <div className="d-none d-lg-flex align-items-center gap-3">
-            <a href="#contact" className="btn-contact nav-link">Join Waitlist</a>
+            <span className="lang-pill" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              English
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+            <a href="https://app.connectiqo.com/login" className="btn-login nav-link">Login</a>
+            <a href="https://app.connectiqo.com/signup" className="btn-contact nav-link">Sign Up</a>
           </div>
 
           {/* Mobile Hamburger */}
@@ -47,12 +58,15 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {open && (
           <nav className="d-lg-none py-3 border-top mt-2">
-            {['#how-it-works', '#features', '#categories', '#for-mentors'].map((href, i) => (
-              <a key={i} href={href} className="d-block py-2 nav-link" onClick={() => setOpen(false)}>
-                {href.slice(1).replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+            {NAV_LINKS.map(link => (
+              <a key={link.href} href={link.href} className="d-block py-2 nav-link" onClick={() => setOpen(false)}>
+                {link.label}
               </a>
             ))}
-            <a href="#contact" className="btn-contact nav-link d-inline-block mt-2" onClick={() => setOpen(false)}>Join Waitlist</a>
+            <div className="d-flex gap-2 mt-2">
+              <a href="https://app.connectiqo.com/login" className="btn-login nav-link" onClick={() => setOpen(false)}>Login</a>
+              <a href="https://app.connectiqo.com/signup" className="btn-contact nav-link" onClick={() => setOpen(false)}>Sign Up</a>
+            </div>
           </nav>
         )}
       </div>
