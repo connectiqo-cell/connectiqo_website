@@ -8,7 +8,7 @@ const links = {
     { label: 'For Mentors', href: '#for-mentors' },
   ],
   Company: [
-    { label: 'About Us', href: '/about' },
+    { label: 'About Us', href: '#about' },
     { label: 'Blog', href: '#' },
   ],
   Legal: [

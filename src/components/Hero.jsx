@@ -107,7 +107,7 @@ function HeroVideoCard() {
   )
 }
 
-function HeroSearchBar() {
+function HeroSearchBar({ entered }) {
   const { text: typed, justCompleted } = useTypewriter(PROFESSIONS)
   const [cursorOn, setCursorOn] = useState(true)
   const [clicking, setClicking] = useState(false)
@@ -128,7 +128,7 @@ function HeroSearchBar() {
   }, [justCompleted])
 
   return (
-    <form className="hero-search-bar" onSubmit={e => e.preventDefault()} aria-label="Mentor search (preview)">
+    <form className={`hero-search-bar hero-anim hero-anim-4 ${entered ? 'hero-anim-in' : ''}`} onSubmit={e => e.preventDefault()} aria-label="Mentor search (preview)">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input
         type="text"
@@ -142,6 +142,15 @@ function HeroSearchBar() {
 }
 
 export default function Hero() {
+  const [entered, setEntered] = useState(false)
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setEntered(true))
+    return () => cancelAnimationFrame(id)
+  }, [])
+
+  const inCls = entered ? 'hero-anim-in' : ''
+
   return (
     <section className="hero-section" id="hero">
       <div className="hero-bg-animation">
@@ -154,22 +163,22 @@ export default function Hero() {
         <div className="row align-items-center g-5">
           {/* Left Content */}
           <div className="col-lg-6">
-            <div className="brand-pill-hero">✦ Open for Early Access</div>
+            <div className={`brand-pill-hero hero-anim hero-anim-1 ${inCls}`}>✦ Open for Early Access</div>
 
-            <h1>
+            <h1 className={`hero-anim hero-anim-2 ${inCls}`}>
               Connect with<br />
               <span className="hero-highlight">Connectiqo</span>
             </h1>
 
-            <p className="hero-subtext">
+            <p className={`hero-subtext hero-anim hero-anim-3 ${inCls}`}>
               Join 1-on-1 video sessions with your favorite creators, mentors &amp; experts.
               Build real connections and grow together.
             </p>
 
-            <HeroSearchBar />
+            <HeroSearchBar entered={entered} />
 
             {/* Trust Badges */}
-            <div className="hero-trust-badges">
+            <div className={`hero-trust-badges hero-anim hero-anim-5 ${inCls}`}>
               {TRUST_BADGES.map(b => (
                 <span key={b.label} className="trust-badge">{b.icon}{b.label}</span>
               ))}

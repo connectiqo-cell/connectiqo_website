@@ -1,15 +1,37 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const SOCIAL_LINKS = [
-  { label: 'IN', name: 'LinkedIn', href: 'https://www.linkedin.com/company/connectiqo-co/' },
-  { label: 'X', name: 'X (Twitter)', href: 'https://x.com/connectiqo' },
-  { label: 'IG', name: 'Instagram', href: 'https://www.instagram.com/connectiqo?utm_source=qr&igsh=bTR4ZWVuanZ2aDdl' },
-  { label: 'YT', name: 'YouTube', href: 'https://youtube.com/@connectiqo?si=gcrPjl-Kdw4i_FM7' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/company/connectiqo-co/', color: '#0A66C2', content: 'in' },
+  { name: 'X (Twitter)', href: 'https://x.com/connectiqo', color: '#0F1419', content: 'X' },
+  {
+    name: 'Instagram',
+    href: 'https://www.instagram.com/connectiqo?utm_source=qr&igsh=bTR4ZWVuanZ2aDdl',
+    color: 'linear-gradient(135deg, #F58529, #DD2A7B, #8134AF)',
+    content: (
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="#fff" stroke="none"/></svg>
+    ),
+  },
+  {
+    name: 'YouTube',
+    href: 'https://youtube.com/@connectiqo?si=gcrPjl-Kdw4i_FM7',
+    color: '#FF0000',
+    content: <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><polygon points="7 4 20 12 7 20 7 4"/></svg>,
+  },
 ]
 
 export default function Contact() {
+  const ref = useRef()
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => e.target.classList.toggle('is-visible', e.isIntersecting)),
+      { threshold: 0.1 }
+    )
+    ref.current?.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -32,11 +54,13 @@ export default function Contact() {
   }
 
   return (
-    <section className="contact-section" id="contact">
+    <section className="contact-section" id="contact" ref={ref}>
+      <div className="contact-bg-orb contact-orb-1" />
+      <div className="contact-bg-orb contact-orb-2" />
       <div className="container">
         <div className="row align-items-start g-5">
           {/* Left */}
-          <div className="col-lg-5">
+          <div className="col-lg-5 animate-on-scroll">
             <h2 className="contact-title">
               Contact<br />
               <span className="text-gradient">Us.</span>
@@ -45,28 +69,50 @@ export default function Contact() {
               Have a question, feedback, or just want to say hello? Fill out the form and our team will get back to you.
             </p>
 
-            <div className="detail-item">
-              <h4>Email</h4>
-              <a href="mailto:contact@connectiqo.com">contact@connectiqo.com</a>
+            <div className="contact-info-chip">
+              <span className="contact-info-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+              </span>
+              <div>
+                <h4>Email</h4>
+                <a href="mailto:contact@connectiqo.com">contact@connectiqo.com</a>
+              </div>
             </div>
-            <div className="detail-item">
-              <h4>Based In</h4>
-              <span style={{ color: '#666' }}>India — serving learners worldwide</span>
+            <div className="contact-info-chip">
+              <span className="contact-info-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
+              <div>
+                <h4>Based In</h4>
+                <span style={{ color: '#666' }}>India — serving learners worldwide</span>
+              </div>
             </div>
 
             <div className="social-links">
               {SOCIAL_LINKS.map(s => (
-                <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" className="social-link" aria-label={s.name}>{s.label}</a>
+                <a
+                  key={s.name}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link"
+                  style={{ background: s.color }}
+                  aria-label={s.name}
+                >
+                  {s.content}
+                </a>
               ))}
             </div>
           </div>
 
           {/* Right — Form */}
-          <div className="col-lg-7">
+          <div className="col-lg-7 animate-on-scroll" style={{ transitionDelay: '120ms' }}>
             <div className="glass-card">
               {sent ? (
                 <div className="text-center py-4">
-                  <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✓</div>
+                  <div className="contact-success-badge">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
                   <h3 style={{ marginBottom: '0.5rem' }}>Message Sent!</h3>
                   <p style={{ color: '#666' }}>Thanks for reaching out. We'll get back to you soon.</p>
                 </div>

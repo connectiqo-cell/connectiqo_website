@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 const CATEGORIES = [
   { label: 'Web Development', icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> },
@@ -23,40 +23,48 @@ const CATEGORIES = [
   { label: 'Career Coaching', icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> },
 ]
 
-function useHorizontalScroll(count) {
-  const trackRef = useRef(null)
-  const [canLeft, setCanLeft] = useState(false)
-  const [canRight, setCanRight] = useState(false)
+const OUTER = CATEGORIES.slice(0, 12)
+const INNER = CATEGORIES.slice(12)
 
-  const update = () => {
-    const el = trackRef.current
-    if (!el) return
-    setCanLeft(el.scrollLeft > 4)
-    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4)
-  }
+const GRADIENTS = [
+  'linear-gradient(135deg, #6D4AFF, #8B5CF6)',
+  'linear-gradient(135deg, #22C55E, #55EFC4)',
+  'linear-gradient(135deg, #3B82F6, #60A5FA)',
+  'linear-gradient(135deg, #FF8A5C, #FFC94D)',
+  'linear-gradient(135deg, #7C3AED, #A78BFA)',
+  'linear-gradient(135deg, #EC4899, #F472B6)',
+  'linear-gradient(135deg, #06B6D4, #67E8F9)',
+  'linear-gradient(135deg, #F59E0B, #FDE68A)',
+]
+const gradientFor = i => GRADIENTS[i % GRADIENTS.length]
 
-  useEffect(() => {
-    update()
-    const el = trackRef.current
-    el?.addEventListener('scroll', update)
-    window.addEventListener('resize', update)
-    return () => {
-      el?.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count])
-
-  const scroll = dir => {
-    trackRef.current?.scrollBy({ left: dir === 'left' ? -260 : 260, behavior: 'smooth' })
-  }
-
-  return { trackRef, canLeft, canRight, scroll }
+function OrbitRing({ items, radius, ringClass, counterClass, colorOffset, compact }) {
+  return (
+    <div className={`orbit-ring ${ringClass}`}>
+      {items.map((c, i) => {
+        const angle = (360 / items.length) * i
+        return (
+          <div
+            key={c.label}
+            className="orbit-item-arm"
+            style={{ transform: `rotate(${angle}deg) translate(${radius}px) rotate(${-angle}deg)` }}
+          >
+            <div className={`orbit-item-spin ${counterClass}`}>
+              <div className="orbit-item-badge" style={{ background: gradientFor(colorOffset + i) }}>
+                {c.icon}
+              </div>
+              <span className={`orbit-item-label${compact ? ' is-compact' : ''}`}>{c.label}</span>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
 }
 
 export default function Categories() {
   const sectionRef = useRef()
-  const { trackRef, canLeft, canRight, scroll } = useHorizontalScroll(CATEGORIES.length)
+  const loopedCategories = [...CATEGORIES, ...CATEGORIES]
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -75,27 +83,26 @@ export default function Categories() {
           <p className="section-subtitle">Browse by category — new topics added as mentors join.</p>
         </div>
 
-        <div className="categories-scroll-row animate-on-scroll">
-          {canLeft && (
-            <button type="button" className="cat-scroll-btn cat-scroll-left" onClick={() => scroll('left')} aria-label="Scroll left">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-          )}
+        {/* Orbit layout — desktop */}
+        <div className="orbit-container animate-on-scroll">
+          <OrbitRing items={OUTER} radius={245} colorOffset={0} ringClass="orbit-ring-outer" counterClass="orbit-counter-outer" />
+          <OrbitRing items={INNER} radius={140} colorOffset={OUTER.length} ringClass="orbit-ring-inner" counterClass="orbit-counter-inner" compact />
+          <div className="orbit-center">
+            <span className="orbit-center-count">20+</span>
+            <span className="orbit-center-label">Skills</span>
+          </div>
+        </div>
 
-          <div className="categories-track" ref={trackRef}>
-            {CATEGORIES.map(c => (
-              <div key={c.label} className="category-card">
-                <div className="category-card-icon">{c.icon}</div>
+        {/* Scrolling row — mobile/tablet fallback */}
+        <div className="categories-scroll-row animate-on-scroll">
+          <div className="categories-track">
+            {loopedCategories.map((c, i) => (
+              <div key={`${c.label}-${i}`} className="category-card" aria-hidden={i >= CATEGORIES.length}>
+                <div className="category-card-icon" style={{ background: gradientFor(i % CATEGORIES.length) }}>{c.icon}</div>
                 <span>{c.label}</span>
               </div>
             ))}
           </div>
-
-          {canRight && (
-            <button type="button" className="cat-scroll-btn cat-scroll-right" onClick={() => scroll('right')} aria-label="Scroll right">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
-          )}
         </div>
       </div>
     </section>

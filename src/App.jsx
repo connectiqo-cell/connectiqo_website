@@ -19,6 +19,7 @@ function Home() {
       <Categories />
       <HowItWorks />
       <Features />
+      <AboutUs />
       <ForMentors />
       <Contact />
     </>
@@ -33,7 +34,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
-        <Route path="/about" element={<AboutUs />} />
       </Routes>
       <Footer />
       <CookieBanner />

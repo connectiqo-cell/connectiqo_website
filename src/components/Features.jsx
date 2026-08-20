@@ -3,69 +3,95 @@ import { useEffect, useRef } from 'react'
 const features = [
   {
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="9" cy="7.6" r="3.4" fill="#ffffff"/>
+        <path d="M2.6 20.4c0-4.9 4.3-7.4 8.6-6.6" fill="none" stroke="#ffffff" strokeWidth="2.4" strokeLinecap="round"/>
+        <circle cx="17.6" cy="16.8" r="5.4" fill="#FFC94D"/>
+        <path d="M15.2 17l1.7 1.7 3-3.4" fill="none" stroke="#4C2E9E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
-    iconClass: 'icon-lightning-gradient',
+    area: 'a',
+    grad: 'bento-grad-1',
+    big: true,
     title: 'Instant Booking',
-    desc: 'Find a mentor and book a session in under a minute. No back-and-forth emails or gatekeepers.',
-    tags: ['Real-time', 'Calendar Sync', 'Reminders'],
+    tagline: 'Book a session in under a minute.',
   },
   {
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+      <svg viewBox="0 0 24 24" fill="none">
+        <rect x="1.5" y="4" width="21" height="15" rx="4" fill="#ffffff" fillOpacity="0.22"/>
+        <circle cx="11" cy="10.4" r="3.1" fill="#ffffff"/>
+        <path d="M5.8 17.4c0-3 2.9-4.6 5.2-4.6s5.2 1.6 5.2 4.6" fill="#ffffff"/>
+        <circle cx="19.4" cy="7.2" r="2" fill="#FF5A5F"/>
       </svg>
     ),
-    iconClass: 'icon-code-gradient',
+    area: 'b',
+    grad: 'bento-grad-2',
     title: 'HD Video Sessions',
-    desc: 'Crystal-clear 1:1 video calls with screen sharing built in. Code reviews, portfolio walkthroughs, live feedback.',
-    tags: ['Screen Share', 'HD Video', '1:1 Focus'],
+    tagline: 'Crystal-clear calls with screen share.',
   },
   {
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="11" cy="7.6" r="3.8" fill="#ffffff"/>
+        <path d="M3.6 20.6c0-5.2 4.2-7.8 7.4-7.8s7.4 2.6 7.4 7.8" fill="#ffffff"/>
+        <circle cx="18.4" cy="17.6" r="5" fill="#ffffff"/>
+        <path d="M16 17.8l1.6 1.6 3-3.4" fill="none" stroke="#16A34A" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
-    iconClass: 'icon-shield-gradient',
+    area: 'c',
+    grad: 'bento-grad-3',
     title: 'Verified Mentors',
-    desc: 'Every mentor is reviewed before going live. We verify experience so you know you\'re learning from someone real.',
-    tags: ['Profile Review', 'Skill Verified', 'Safe Platform'],
+    tagline: 'Reviewed before they go live.',
   },
   {
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+      <svg viewBox="0 0 24 24" fill="none">
+        <rect x="7" y="10" width="10" height="10" rx="4" fill="#ffffff"/>
+        <rect x="7.6" y="4.5" width="2.4" height="8" rx="1.2" fill="#ffffff"/>
+        <rect x="10.8" y="3" width="2.4" height="9.5" rx="1.2" fill="#ffffff"/>
+        <rect x="14" y="4" width="2.4" height="8.5" rx="1.2" fill="#ffffff"/>
+        <rect x="4.2" y="9" width="2.4" height="6" rx="1.2" fill="#ffffff" transform="rotate(-18 4.2 9)"/>
+        <circle cx="18.4" cy="6" r="4.4" fill="#FFC94D"/>
+        <path d="M16.6 6h3.6M18.4 4.2v3.6" stroke="#4C2E9E" strokeWidth="1.3" strokeLinecap="round"/>
       </svg>
     ),
-    iconClass: 'icon-cloud-gradient',
+    area: 'd',
+    grad: 'bento-grad-4',
     title: 'Flexible Pricing',
-    desc: 'Mentors set their own rates. Pay only for the sessions you book. No subscriptions, no lock-in.',
-    tags: ['Pay-Per-Session', 'Transparent Rates', 'No Lock-in'],
+    tagline: 'Pay per session. No lock-in.',
   },
   {
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M3 5.5A2.5 2.5 0 0 1 5.5 3h11A2.5 2.5 0 0 1 19 5.5v7A2.5 2.5 0 0 1 16.5 15H9l-4.5 4v-4H5.5A2.5 2.5 0 0 1 3 12.5v-7z" fill="#ffffff"/>
+        <circle cx="8.4" cy="9" r="1.15" fill="#7C3AED"/>
+        <circle cx="12" cy="9" r="1.15" fill="#7C3AED"/>
+        <circle cx="15.6" cy="9" r="1.15" fill="#7C3AED"/>
+        <circle cx="19" cy="17.6" r="4.6" fill="#ffffff"/>
+        <path d="M19 15.2v2.6l1.8 1" fill="none" stroke="#7C3AED" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
-    iconClass: 'icon-brain-gradient',
+    area: 'e',
+    grad: 'bento-grad-5',
     title: 'Async Messaging',
-    desc: 'Share context, questions, or resources before or after your session. Stay connected without scheduling calls for every question.',
-    tags: ['Pre-session Notes', 'Follow-ups', 'File Sharing'],
+    tagline: 'Stay connected between calls.',
   },
   {
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="8" cy="9" r="5.4" fill="#ffffff" fillOpacity="0.9"/>
+        <circle cx="15" cy="7.6" r="4.6" fill="#ffffff" fillOpacity="0.75"/>
+        <circle cx="12" cy="15.6" r="5" fill="#ffffff"/>
+        <circle cx="12" cy="13.4" r="1.9" fill="#6D4AFF"/>
+        <path d="M8.4 19c0-2 1.6-3.2 3.6-3.2s3.6 1.2 3.6 3.2" fill="#6D4AFF"/>
       </svg>
     ),
-    iconClass: 'icon-infinity-gradient',
+    area: 'f',
+    grad: 'bento-grad-6',
+    big: true,
     title: 'Every Domain',
-    desc: 'Tech, design, business, creative arts, languages, wellness — if someone has mastered it, you can learn from them here.',
-    tags: ['20+ Categories', 'Growing Network', 'All Levels'],
+    tagline: '20+ categories, always growing.',
   },
 ]
 
@@ -90,17 +116,17 @@ export default function Features() {
           <p className="section-subtitle">Built for real knowledge transfer between real people.</p>
         </div>
 
-        <div className="row g-4">
+        <div className="bento-grid">
           {features.map((f, i) => (
-            <div key={i} className="col-md-6 col-lg-4">
-              <div className="capability-card animate-on-scroll" style={{ transitionDelay: `${i * 80}ms` }}>
-                <div className={`cap-icon-wrapper ${f.iconClass}`}>{f.icon}</div>
-                <h3>{f.title}</h3>
-                <p>{f.desc}</p>
-                <div className="tech-tags">
-                  {f.tags.map(t => <span key={t}>{t}</span>)}
-                </div>
-              </div>
+            <div
+              key={f.title}
+              className={`bento-tile ${f.grad}${f.big ? ' bento-tile-lg' : ''} animate-on-scroll`}
+              style={{ gridArea: f.area, transitionDelay: `${i * 70}ms` }}
+            >
+              <span className="bento-watermark">{f.icon}</span>
+              <span className="bento-icon">{f.icon}</span>
+              <h3>{f.title}</h3>
+              <p className="bento-tagline">{f.tagline}</p>
             </div>
           ))}
         </div>
