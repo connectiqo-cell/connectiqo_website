@@ -1046,3 +1046,6 @@ h1, h2, h3, h4, h5, h6 {
   .about-mission { font-size: 1.15rem; }
   .about-value-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Disabled (coming soon) ──────────────────────── */
+.is-disabled { opacity: 0.5; cursor: not-allowed; }
