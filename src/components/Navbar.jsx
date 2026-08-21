@@ -19,11 +19,16 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+
   return (
-    <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
+    <header className={`site-header ${scrolled || open ? 'scrolled' : ''}`}>
       <div className="container">
         <div className="d-flex align-items-center justify-content-between">
-          <Link to="/" className="logo logo-text">
+          <Link to="/" className="logo logo-text" onClick={() => setOpen(false)}>
             <img src="/logo.png" alt="" className="logo-mark" />
             <span>Connect<span className="logo-accent">iqo</span></span>
           </Link>
@@ -50,6 +55,7 @@ export default function Navbar() {
             className="d-lg-none border-0 bg-transparent p-2"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
+            aria-expanded={open}
           >
             <div style={{ width: 24, display: 'flex', flexDirection: 'column', gap: 5 }}>
               <span style={{ display: 'block', height: 2, background: '#1a1a1a', borderRadius: 2, transition: 'all 0.3s', transform: open ? 'rotate(45deg) translate(5px,5px)' : 'none' }} />
