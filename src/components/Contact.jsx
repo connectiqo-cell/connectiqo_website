@@ -84,7 +84,7 @@ export default function Contact() {
               </span>
               <div>
                 <h4>Based In</h4>
-                <span style={{ color: '#666' }}>India — serving learners worldwide</span>
+                <span style={{ color: '#666' }}>India — serving connectivity</span>
               </div>
             </div>
 

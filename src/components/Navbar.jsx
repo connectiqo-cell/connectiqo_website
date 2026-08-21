@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import HashLink from './HashLink'
 
 const NAV_LINKS = [
   { href: '#categories', label: 'Categories' },
@@ -23,13 +24,14 @@ export default function Navbar() {
       <div className="container">
         <div className="d-flex align-items-center justify-content-between">
           <Link to="/" className="logo logo-text">
-            Connect<span className="logo-accent">iqo</span>
+            <img src="/logo.png" alt="" className="logo-mark" />
+            <span>Connect<span className="logo-accent">iqo</span></span>
           </Link>
 
           {/* Desktop Nav */}
           <nav className="d-none d-lg-flex align-items-center gap-4">
             {NAV_LINKS.map(link => (
-              <a key={link.href} href={link.href} className="nav-link">{link.label}</a>
+              <HashLink key={link.href} hash={link.href} className="nav-link">{link.label}</HashLink>
             ))}
           </nav>
 
@@ -61,9 +63,9 @@ export default function Navbar() {
         {open && (
           <nav className="d-lg-none py-3 border-top mt-2">
             {NAV_LINKS.map(link => (
-              <a key={link.href} href={link.href} className="d-block py-2 nav-link" onClick={() => setOpen(false)}>
+              <HashLink key={link.href} hash={link.href} className="d-block py-2 nav-link" onClick={() => setOpen(false)}>
                 {link.label}
-              </a>
+              </HashLink>
             ))}
             <div className="d-flex gap-2 mt-2">
               <a href="https://app.connectiqo.com/login" className="btn-login nav-link" onClick={() => setOpen(false)}>Login</a>

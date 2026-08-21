@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import HashLink from './HashLink'
 
 const links = {
   Platform: [
@@ -14,7 +15,7 @@ const links = {
   Legal: [
     { label: 'Privacy Policy', href: '/privacy' },
     { label: 'Terms of Service', href: '/terms' },
-    { label: 'Cookie Policy', href: '#' },
+    { label: 'Cookie Policy', href: '/cookies' },
   ],
 }
 
@@ -22,6 +23,7 @@ function FooterLink({ href, children }) {
   const style = { color: '#888', textDecoration: 'none', fontSize: '0.9rem' }
   const hover = { onMouseEnter: e => e.target.style.color = '#fff', onMouseLeave: e => e.target.style.color = '#888' }
   if (href.startsWith('/')) return <Link to={href} style={style} {...hover}>{children}</Link>
+  if (href.startsWith('#') && href.length > 1) return <HashLink hash={href} style={style} {...hover}>{children}</HashLink>
   return <a href={href} style={style} {...hover}>{children}</a>
 }
 
@@ -59,7 +61,7 @@ export default function Footer() {
           <div className="footer-links">
             <Link to="/privacy">Privacy</Link>
             <Link to="/terms">Terms</Link>
-            <a href="#">Cookies</a>
+            <Link to="/cookies">Cookies</Link>
           </div>
         </div>
       </div>

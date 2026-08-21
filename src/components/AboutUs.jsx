@@ -129,16 +129,11 @@ export default function AboutUs() {
           </div>
         </div>
 
-        <div className="about-location-chip animate-on-scroll">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Built by HR Nexus in Haridwar, Uttarakhand, India — serving learners &amp; creators worldwide
-        </div>
-
         <div className="about-cta-panel animate-on-scroll">
           <h2>Want to be part of it?</h2>
-          <p>Whether you're looking to learn something new or share what you know, we'd love to hear from you.</p>
-          <a href="#contact" className="btn-mentor-cta">
-            Get in Touch
+          <p>Whether you're looking to learn something new or share what you know, be a part of Connectiqo.</p>
+          <a href="https://app.connectiqo.com/signup" className="btn-mentor-cta">
+            Sign Up Now
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
         </div>
