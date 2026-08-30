@@ -46,8 +46,8 @@ export default function Navbar() {
               English
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"/></svg>
             </span>
-            <span className="btn-login nav-link is-disabled" title="Coming soon">Login</span>
-            <span className="btn-contact nav-link is-disabled" title="Coming soon">Sign Up</span>
+            <a href="https://app.connectiqo.com/login" className="btn-login nav-link">Login</a>
+            <a href="https://app.connectiqo.com/signup" className="btn-contact nav-link">Sign Up</a>
           </div>
 
           {/* Mobile Hamburger */}
@@ -74,8 +74,8 @@ export default function Navbar() {
               </HashLink>
             ))}
             <div className="d-flex gap-2 mt-2">
-              <span className="btn-login nav-link is-disabled" title="Coming soon">Login</span>
-              <span className="btn-contact nav-link is-disabled" title="Coming soon">Sign Up</span>
+              <a href="https://app.connectiqo.com/login" className="btn-login nav-link" onClick={() => setOpen(false)}>Login</a>
+              <a href="https://app.connectiqo.com/signup" className="btn-contact nav-link" onClick={() => setOpen(false)}>Sign Up</a>
             </div>
           </nav>
         )}

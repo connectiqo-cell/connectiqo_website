@@ -132,10 +132,10 @@ export default function AboutUs() {
         <div className="about-cta-panel animate-on-scroll">
           <h2>Want to be part of it?</h2>
           <p>Whether you're looking to learn something new or share what you know, be a part of Connectiqo.</p>
-          <span className="btn-mentor-cta is-disabled" title="Coming soon">
+          <a href="https://app.connectiqo.com/signup" className="btn-mentor-cta">
             Sign Up Now
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </span>
+          </a>
         </div>
       </div>
     </section>
