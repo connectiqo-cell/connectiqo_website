@@ -189,6 +189,17 @@ export default function Hero() {
           {/* Right — Video + Profile Cards */}
           <div className="col-lg-6">
             <div className="hero-media-grid">
+              <div className="hero-price-badge d-none d-lg-flex">
+                <span className="hpb-sparkle hpb-sparkle-1">✦</span>
+                <span className="hpb-sparkle hpb-sparkle-2">✦</span>
+                <span className="hpb-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6D4AFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1.5" fill="#6D4AFF" stroke="none"/></svg>
+                </span>
+                <div>
+                  <p className="hpb-title">Price Your Time Your Way</p>
+                  <p className="hpb-sub">Set a flexible per-session rate that works for you.</p>
+                </div>
+              </div>
               <div className="hero-media-col d-none d-lg-flex">
                 <HeroProfileCard {...HERO_PROFILE_CARDS[0]} />
                 <HeroProfileCard {...HERO_PROFILE_CARDS[2]} />
