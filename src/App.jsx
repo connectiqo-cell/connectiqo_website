@@ -13,6 +13,7 @@ import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import CookiePolicy from './components/CookiePolicy'
 import AboutUs from './components/AboutUs'
+import NotFound from './components/NotFound'
 import RouteTracker from './components/RouteTracker'
 
 function Home() {
@@ -49,6 +50,7 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/cookies" element={<CookiePolicy />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
       <CookieBanner />

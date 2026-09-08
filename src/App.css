@@ -1004,6 +1004,25 @@ h1, h2, h3, h4, h5, h6 {
   .legal-title { font-size: 1.6rem; }
 }
 
+/* ── 404 Not Found ────────────────────────────────── */
+.not-found-page {
+  min-height: 80vh;
+  padding: 9rem 0 6rem;
+  background: #fff;
+  display: flex;
+  align-items: center;
+}
+.not-found-page .container { max-width: 560px; }
+.nf-code { font-family: var(--font-heading); font-size: 5rem; font-weight: 900; line-height: 1; color: var(--accent-purple); margin-bottom: 0.5rem; }
+.nf-title { font-size: 2rem; margin-bottom: 0.75rem; }
+.nf-subtext { color: #555; font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem; }
+.not-found-page .btn-contact { display: inline-block; text-decoration: none; }
+@media (max-width: 576px) {
+  .not-found-page { padding: 7rem 0 4rem; }
+  .nf-code { font-size: 3.5rem; }
+  .nf-title { font-size: 1.6rem; }
+}
+
 /* ── About Us ─────────────────────────────────────── */
 .about-page { padding: 6rem 0; background: #fff; position: relative; overflow: hidden; }
 .about-bg-orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.3; pointer-events: none; }
