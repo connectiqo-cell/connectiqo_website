@@ -1004,6 +1004,52 @@ h1, h2, h3, h4, h5, h6 {
   .legal-title { font-size: 1.6rem; }
 }
 
+/* ── Blog ─────────────────────────────────────────── */
+.blog-page { padding: 9rem 0 6rem; background: #fff; max-width: 100%; }
+.blog-page .container { max-width: 980px; }
+.blog-meta { color: #888; font-size: 0.85rem; margin-bottom: 0.75rem; }
+.blog-title { font-size: 2.4rem; margin-bottom: 2rem; line-height: 1.25; }
+.blog-cover { margin: 0 0 2.5rem; border-radius: 16px; overflow: hidden; }
+/* Cover photo is portrait — crop to landscape, keeping the cup, hands and keyboard in frame */
+.blog-cover img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 40%; display: block; }
+.blog-section { padding-top: 2rem; margin-top: 1.5rem; border-top: 1px solid #f0f0f0; }
+.blog-section:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.blog-section h2 { font-size: 1.4rem; margin-bottom: 1rem; }
+.blog-h3 { font-size: 1.05rem; font-weight: 700; margin: 1.5rem 0 0.5rem; color: #1a1a1a; }
+.blog-p { color: #444; font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem; }
+.blog-ul { color: #444; font-size: 1.05rem; line-height: 1.8; margin: 0 0 1rem; padding-left: 1.25rem; }
+.blog-ul li { margin-bottom: 0.4rem; }
+.blog-figure { margin: 1.75rem 0; }
+.blog-figure img { width: 100%; height: auto; border-radius: 12px; display: block; }
+.blog-figure figcaption { color: #888; font-size: 0.85rem; margin-top: 0.6rem; text-align: center; }
+.blog-cta {
+  margin-top: 3rem;
+  padding: 2.5rem;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  text-align: center;
+}
+.blog-cta h2 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+.blog-cta p { color: #444; font-size: 0.98rem; line-height: 1.7; margin-bottom: 1.5rem; }
+.blog-cta-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+.blog-cta .btn-contact, .blog-cta .btn-login, .blog-callout .btn-contact { display: inline-block; text-decoration: none; }
+.blog-callout {
+  margin: 1.75rem 0;
+  padding: 1.5rem 1.75rem;
+  background: #f6f3ff;
+  border-left: 4px solid var(--accent-purple);
+  border-radius: 12px;
+}
+.blog-callout h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+.blog-callout p { color: #444; font-size: 1rem; line-height: 1.7; margin-bottom: 1rem; }
+@media (max-width: 576px) {
+  .blog-page { padding: 7rem 0 4rem; }
+  .blog-title { font-size: 1.7rem; }
+  .blog-cta { padding: 1.75rem; }
+  .blog-callout { padding: 1.25rem; }
+}
+
 /* ── 404 Not Found ────────────────────────────────── */
 .not-found-page {
   min-height: 80vh;
