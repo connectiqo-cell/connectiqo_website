@@ -13,8 +13,10 @@ import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import CookiePolicy from './components/CookiePolicy'
 import AboutUs from './components/AboutUs'
+import OnlineEarningForBeginners from './components/blog/OnlineEarningForBeginners'
 import NotFound from './components/NotFound'
 import RouteTracker from './components/RouteTracker'
+import RouteMeta from './components/RouteMeta'
 
 function Home() {
   const location = useLocation()
@@ -44,12 +46,14 @@ function App() {
   return (
     <>
       <RouteTracker />
+      <RouteMeta />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/cookies" element={<CookiePolicy />} />
+        <Route path="/blog/online-earning-for-beginners" element={<OnlineEarningForBeginners />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
