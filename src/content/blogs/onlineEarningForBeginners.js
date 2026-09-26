@@ -13,9 +13,11 @@ const SIGNUP_URL = 'https://app.connectiqo.com/signup'
 
 export const BLOG_META = {
   slug: 'online-earning-for-beginners',
-  title: 'Online Earning for Beginners: A Step-by-Step Guide (2026)',
-  metaTitle: 'Online Earning for Beginners: Step-by-Step Guide (2026)',
+  keyword: 'Online Earning Money for Beginners',
+  title: 'Online Earning Money for Beginners: A Step-by-Step Guide',
+  metaTitle: 'Online Earning Money for Beginners: Step-by-Step Guide',
   metaDescription: 'New to online earning? Learn how to start step by step — and how Connectiqo’s 1:1 mentor sessions help you earn from your skills or learn ones that pay.',
+  excerpt: 'New to earning online? A step-by-step path to picking a skill, choosing a method and getting paid — without the guesswork.',
   datePublished: 'September 24, 2026',
   readTime: '7 min read',
   coverImage,

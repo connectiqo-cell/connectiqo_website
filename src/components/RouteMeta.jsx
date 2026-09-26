@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { BLOG_META } from '../content/blogs/onlineEarningForBeginners'
+import { BLOG_POSTS } from '../content/blogs'
 
 const SITE_URL = 'https://connectiqo.com'
-const BLOG_PATH = `/blog/${BLOG_META.slug}`
+const BLOG_PATHS = BLOG_POSTS.map(({ meta }) => `/blog/${meta.slug}`)
 // Keep in sync with the routes in App.jsx and public/sitemap.xml
-const INDEXABLE_PATHS = ['/', '/privacy', '/terms', '/cookies', BLOG_PATH]
+const INDEXABLE_PATHS = ['/', '/privacy', '/terms', '/cookies', '/blog', ...BLOG_PATHS]
 
 // Defaults must match the tags in index.html — used to restore them when
 // leaving a page that overrides title/description (e.g. a blog post).
@@ -15,10 +15,14 @@ const DEFAULT_DESCRIPTION = "A peer-to-peer mentor marketplace. Teach what you k
 // Per-page title/description overrides. Add an entry here for any indexable
 // page whose content differs from the homepage defaults (e.g. blog posts).
 const PAGE_META = {
-  [BLOG_PATH]: {
-    title: `${BLOG_META.metaTitle} | Connectiqo`,
-    description: BLOG_META.metaDescription,
+  '/blog': {
+    title: 'Blog — Guides to Earn, Connect and Grow | Connectiqo',
+    description: 'Practical guides on online earning, collaboration, brand deals, personal branding and online mentoring from Connectiqo.',
   },
+  ...Object.fromEntries(BLOG_POSTS.map(({ meta }) => [
+    `/blog/${meta.slug}`,
+    { title: `${meta.metaTitle} | Connectiqo`, description: meta.metaDescription },
+  ])),
 }
 
 function setTag(selector, tag, attrs) {

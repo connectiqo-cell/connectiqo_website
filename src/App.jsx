@@ -13,7 +13,8 @@ import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import CookiePolicy from './components/CookiePolicy'
 import AboutUs from './components/AboutUs'
-import OnlineEarningForBeginners from './components/blog/OnlineEarningForBeginners'
+import BlogIndex from './components/BlogIndex'
+import BlogArticle from './components/blog/BlogArticle'
 import NotFound from './components/NotFound'
 import RouteTracker from './components/RouteTracker'
 import RouteMeta from './components/RouteMeta'
@@ -53,7 +54,8 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/cookies" element={<CookiePolicy />} />
-        <Route path="/blog/online-earning-for-beginners" element={<OnlineEarningForBeginners />} />
+        <Route path="/blog" element={<BlogIndex />} />
+        <Route path="/blog/:slug" element={<BlogArticle />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
