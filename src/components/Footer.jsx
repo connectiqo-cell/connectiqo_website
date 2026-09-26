@@ -10,7 +10,7 @@ const links = {
   ],
   Company: [
     { label: 'About Us', href: '#about' },
-    { label: 'Blog', href: '/blog/online-earning-for-beginners' },
+    { label: 'Blog', href: '/blog' },
   ],
   Legal: [
     { label: 'Privacy Policy', href: '/privacy' },

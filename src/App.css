@@ -1050,6 +1050,40 @@ h1, h2, h3, h4, h5, h6 {
   .blog-callout { padding: 1.25rem; }
 }
 
+/* ── Blog index ───────────────────────────────────── */
+.blog-index-page { padding: 9rem 0 6rem; background: #fff; }
+.blog-index-label { color: var(--accent-purple); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; }
+.blog-index-title { font-size: 2.6rem; margin-bottom: 1rem; }
+.blog-index-subtext { color: #555; font-size: 1.05rem; line-height: 1.7; max-width: 640px; margin-bottom: 3rem; }
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+}
+.blog-card:hover { border-color: transparent; box-shadow: 0 12px 28px rgba(109,74,255,0.18); transform: translateY(-3px); color: inherit; }
+.blog-card-cover { aspect-ratio: 16 / 9; overflow: hidden; background: #f3f0ff; }
+.blog-card-cover img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; display: block; transition: transform 0.4s; }
+.blog-card:hover .blog-card-cover img { transform: scale(1.04); }
+.blog-card-body { display: flex; flex-direction: column; flex: 1; padding: 1.5rem; }
+.blog-card-keyword { color: var(--accent-purple); font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem; }
+.blog-card-title { font-size: 1.15rem; line-height: 1.35; margin-bottom: 0.75rem; }
+.blog-card-excerpt { color: #555; font-size: 0.93rem; line-height: 1.6; margin-bottom: 1.25rem; flex: 1; }
+.blog-card-meta { color: #888; font-size: 0.82rem; font-weight: 500; }
+.blog-card:hover .blog-card-meta { color: var(--accent-purple); }
+.blog-back { display: inline-block; color: var(--accent-purple); font-size: 0.9rem; font-weight: 500; text-decoration: none; margin-bottom: 1.25rem; }
+.blog-back:hover { text-decoration: underline; }
+@media (max-width: 576px) {
+  .blog-index-page { padding: 7rem 0 4rem; }
+  .blog-index-title { font-size: 1.8rem; }
+}
+
 /* ── 404 Not Found ────────────────────────────────── */
 .not-found-page {
   min-height: 80vh;

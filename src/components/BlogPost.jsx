@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import HashLink from './HashLink'
 
 function Block({ block, i }) {
@@ -41,14 +42,17 @@ export default function BlogPost({ meta, sections, cta }) {
   return (
     <article className="blog-page">
       <div className="container">
+        <Link to="/blog" className="blog-back">&larr; All articles</Link>
         <p className="blog-meta">
           {meta.datePublished} &middot; {meta.readTime}
         </p>
         <h1 className="blog-title">{meta.title}</h1>
 
-        <figure className="blog-cover">
-          <img src={meta.coverImage} alt={meta.coverImageAlt} />
-        </figure>
+        {meta.coverImage && (
+          <figure className="blog-cover">
+            <img src={meta.coverImage} alt={meta.coverImageAlt} />
+          </figure>
+        )}
 
         <div className="blog-body">
           {sections.map(section => (
