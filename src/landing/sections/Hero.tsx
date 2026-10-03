@@ -44,34 +44,35 @@ const COMMUNITY: PhotoId[] = ['person-ayaan', 'person-rhea', 'person-sana', 'per
 
 const LAST_KEY = 'cq_hero_last'
 
-// Picks which hero to show on this page load: one of the posters or the live
-// hero (-1). Random, but never the one shown last time, so every refresh
-// changes it. Phones and tablets always get the live hero, because the wide
-// poster artwork would be too small to read there.
-// The choice is made once per page load and cached: React's StrictMode runs
-// state initialisers twice in development, which would otherwise rotate twice.
+// Which hero to show on this page load. -1 is the live hero, 0…n are posters.
+// The live hero always comes first: it is what a new visitor sees, and each
+// later page load moves one step along the line and wraps round.
+// Phones and tablets always get the live hero, because the wide poster
+// artwork would be too small to read there.
+const ORDER = [-1, ...POSTERS.map((_, i) => i)]
+
+// Decided once per page load and cached: React's StrictMode runs state
+// initialisers twice in development, which would otherwise step twice.
 let picked: number | undefined
 
-function pickPoster(): number {
-  if (picked === undefined) picked = rotatePoster()
+function pickHero(): number {
+  if (picked === undefined) picked = nextHero()
   return picked
 }
 
-function rotatePoster(): number {
+function nextHero(): number {
   if (!window.matchMedia('(min-width: 1024px)').matches) return -1
-  let last: number | null = null
+  let step = 0
   try {
     const stored = localStorage.getItem(LAST_KEY)
-    if (stored !== null) last = Number(stored)
+    if (stored !== null) step = (ORDER.indexOf(Number(stored)) + 1) % ORDER.length
   } catch { /* storage blocked */ }
-  const options = [-1, ...POSTERS.map((_, i) => i)].filter(i => i !== last)
-  const next = options[Math.floor(Math.random() * options.length)]
-  try { localStorage.setItem(LAST_KEY, String(next)) } catch { /* storage blocked */ }
-  return next
+  try { localStorage.setItem(LAST_KEY, String(ORDER[step])) } catch { /* storage blocked */ }
+  return ORDER[step]
 }
 
 export default function Hero() {
-  const [poster] = useState(pickPoster)
+  const [poster] = useState(pickHero)
   return poster < 0 ? <LiveHero /> : <PosterHero poster={POSTERS[poster]} />
 }
 
