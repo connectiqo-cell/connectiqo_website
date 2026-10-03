@@ -45,7 +45,8 @@ const COMMUNITY: PhotoId[] = ['person-ayaan', 'person-rhea', 'person-sana', 'per
 const LAST_KEY = 'cq_hero_last'
 
 // Which hero to show on this page load. -1 is the live hero, 0…n are posters.
-// The live hero always comes first: it is what a new visitor sees, and each
+// The live hero always comes first: every visit (new tab or browser session)
+// starts on it, because the position is kept in sessionStorage, and each
 // later page load moves one step along the line and wraps round.
 // Phones and tablets always get the live hero, because the wide poster
 // artwork would be too small to read there.
@@ -64,10 +65,10 @@ function nextHero(): number {
   if (!window.matchMedia('(min-width: 1024px)').matches) return -1
   let step = 0
   try {
-    const stored = localStorage.getItem(LAST_KEY)
+    const stored = sessionStorage.getItem(LAST_KEY)
     if (stored !== null) step = (ORDER.indexOf(Number(stored)) + 1) % ORDER.length
   } catch { /* storage blocked */ }
-  try { localStorage.setItem(LAST_KEY, String(ORDER[step])) } catch { /* storage blocked */ }
+  try { sessionStorage.setItem(LAST_KEY, String(ORDER[step])) } catch { /* storage blocked */ }
   return ORDER[step]
 }
 
