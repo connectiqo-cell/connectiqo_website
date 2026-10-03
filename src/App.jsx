@@ -1,47 +1,20 @@
-import { useEffect } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import HowItWorks from './components/HowItWorks'
-import Features from './components/Features'
-import Categories from './components/Categories'
-import ForMentors from './components/ForMentors'
-import Contact from './components/Contact'
 import Footer from './components/Footer'
 import CookieBanner from './components/CookieBanner'
-import PrivacyPolicy from './components/PrivacyPolicy'
-import TermsOfService from './components/TermsOfService'
-import CookiePolicy from './components/CookiePolicy'
-import AboutUs from './components/AboutUs'
-import BlogIndex from './components/BlogIndex'
-import BlogArticle from './components/blog/BlogArticle'
-import NotFound from './components/NotFound'
 import RouteTracker from './components/RouteTracker'
 import RouteMeta from './components/RouteMeta'
+import Landing from './landing/Landing'
 
-function Home() {
-  const location = useLocation()
-
-  useEffect(() => {
-    if (!location.hash) return
-    const id = setTimeout(() => {
-      document.querySelector(location.hash)?.scrollIntoView({ behavior: 'smooth' })
-    }, 80)
-    return () => clearTimeout(id)
-  }, [location.hash])
-
-  return (
-    <>
-      <Hero />
-      <Categories />
-      <HowItWorks />
-      <Features />
-      <AboutUs />
-      <ForMentors />
-      <Contact />
-    </>
-  )
-}
+// Everything except the homepage is split out so the landing page ships only
+// its own code.
+const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'))
+const TermsOfService = lazy(() => import('./components/TermsOfService'))
+const CookiePolicy = lazy(() => import('./components/CookiePolicy'))
+const BlogIndex = lazy(() => import('./components/BlogIndex'))
+const BlogArticle = lazy(() => import('./components/blog/BlogArticle'))
+const NotFound = lazy(() => import('./components/NotFound'))
 
 function App() {
   return (
@@ -49,15 +22,17 @@ function App() {
       <RouteTracker />
       <RouteMeta />
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<TermsOfService />} />
-        <Route path="/cookies" element={<CookiePolicy />} />
-        <Route path="/blog" element={<BlogIndex />} />
-        <Route path="/blog/:slug" element={<BlogArticle />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/cookies" element={<CookiePolicy />} />
+          <Route path="/blog" element={<BlogIndex />} />
+          <Route path="/blog/:slug" element={<BlogArticle />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
       <Footer />
       <CookieBanner />
     </>
