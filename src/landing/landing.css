@@ -456,8 +456,24 @@
 
 /* ── Connection ───────────────────────────────────────────────────────── */
 
-.cq-conn { padding-block: var(--cq-space) calc(var(--cq-space) * .8); }
-.cq-conn__title { font-size: clamp(2.6rem, 1rem + 5vw, 6.5rem); max-width: 16ch; margin-top: 0; }
+/* The photo takes the full height left under the nav; the title and quote share the column beside it,
+   so the whole section lands in one screen whatever the window's shape. */
+.cq-conn {
+  --conn-h: calc(100svh - var(--cq-nav-h));
+  --conn-pad: min(var(--cq-space), var(--conn-h) * .07);
+  --conn-gap: clamp(1.5rem, 4vw, 4.5rem);
+  --conn-photo: max(11rem, var(--conn-h) - var(--conn-pad) * 1.8);
+  --conn-wrap: min(100vw - 2 * var(--cq-gutter), var(--cq-max));
+  --conn-photo-w: min(var(--conn-wrap) * .62, var(--conn-photo) * 1.5);
+  --conn-col: calc(var(--conn-wrap) - var(--conn-photo-w) - var(--conn-gap));
+  /* As large as the column allows with "Real conversations." (about 8.6em wide) still on one line,
+     and never so tall that it crowds the quote below. */
+  --conn-title: max(2rem, min(var(--conn-col) / 8.9, (var(--conn-photo) - 15rem) / 2, 8rem));
+  display: grid; grid-template-columns: var(--conn-photo-w) minmax(0, 1fr);
+  grid-template-rows: auto 1fr; gap: 1.5rem var(--conn-gap);
+  padding-block: var(--conn-pad) calc(var(--conn-pad) * .8);
+}
+.cq-conn__title { grid-area: 1 / 2; font-size: var(--conn-title); margin-top: 0; }
 .cq-conn__muted { color: var(--cq-muted); }
 .cq-strike { position: relative; white-space: nowrap; }
 .cq-strike svg { position: absolute; left: -3%; top: 36%; width: 106%; height: .42em; overflow: visible; }
@@ -470,30 +486,32 @@
 .cq-conn__title.is-in .cq-strike path,
 html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
 
-.cq-conn__grid {
-  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: clamp(1.5rem, 3vw, 3rem); align-items: end;
-  margin-top: clamp(2.5rem, 5vw, 5rem);
-}
 .cq-conn__media {
-  grid-column: 1 / span 8; position: relative;
+  grid-area: 1 / 1 / span 2; position: relative;
   aspect-ratio: 3 / 2; border-radius: .5rem; overflow: hidden;
 }
 .cq-conn__media .cq-ph__label { max-width: 55%; }
-.cq-conn__copy { grid-column: 9 / span 4; padding-bottom: 1rem; }
+.cq-conn__copy { grid-area: 2 / 2; align-self: end; max-width: 32rem; padding-bottom: 1rem; }
 .cq-conn__note { margin-top: 1.5rem; color: var(--cq-accent-ink); rotate: -2deg; }
 
 /* ── Talk ─────────────────────────────────────────────────────────────── */
 
+/* Sized against the height left under the nav so the word, the verbs and the aside land in one screen. */
 .cq-talk {
+  --talk-h: calc(100svh - var(--cq-nav-h));
+  /* The word (about 2.6em wide) shares its row with the verbs, which are sized so their four lines
+     match the word's height; at that size they take about 1.3em of the word's own size in width. */
+  --talk-word: max(6rem, min((min(100vw - 2 * var(--cq-gutter), var(--cq-max)) - 2rem) / 3.9, var(--talk-h) * .68, 34rem));
+  --talk-verb: max(1.6rem, var(--talk-word) * .18);
   position: relative; overflow: hidden;
-  padding-block: var(--cq-space);
+  padding-block: min(var(--cq-space), var(--talk-h) * .06);
   background: var(--cq-ink); color: var(--cq-paper);
 }
+.cq-talk__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
 .cq-talk__head { position: relative; width: fit-content; }
 .cq-talk__word {
   display: flex; align-items: baseline;
-  font-size: clamp(7.5rem, 30vw, 34rem);
+  font-size: var(--talk-word);
   font-weight: 600; line-height: .8; letter-spacing: -.075em;
   margin-left: -.04em;
 }
@@ -522,14 +540,14 @@ html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
 }
 
 .cq-talk__foot {
-  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: 3rem; align-items: end;
-  margin-top: clamp(6rem, 10vw, 10rem); padding-top: 2.5rem;
+  /* The handwritten note hangs into this gap, so it never drops below 4.25rem. */
+  margin-top: min(clamp(6rem, 10vw, 10rem), max(4.25rem, var(--talk-h) * .09)); padding-top: min(2.5rem, var(--talk-h) * .035);
   border-top: 1px solid rgb(247 243 238 / .16);
 }
+.cq-talk__verbs { flex: none; }
 .cq-talk__verbs li {
   display: flex; align-items: baseline; gap: 1.25rem;
-  font-size: clamp(2.2rem, 1rem + 3.4vw, 4.6rem); font-weight: 500;
+  font-size: var(--talk-verb); font-weight: 500;
   line-height: 1.1; letter-spacing: -.035em;
   color: rgb(247 243 238 / .3);
   transition: color .9s var(--cq-ease) calc(var(--i) * 180ms + 200ms);
@@ -537,8 +555,9 @@ html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
 .cq-talk__verbs.is-in li, html:not(.cq-js) .cq-talk__verbs li { color: var(--cq-paper); }
 .cq-talk__verbs li:hover { color: var(--cq-accent); transition-delay: 0s; }
 .cq-talk__num { font: 500 .75rem/1 var(--cq-mono); letter-spacing: 0; color: rgb(247 243 238 / .45); width: 1.5rem; }
-.cq-talk__line { font-family: var(--cq-serif); font-style: italic; font-size: clamp(1.8rem, 1rem + 2vw, 3rem); line-height: 1.1; }
-.cq-talk__body { margin-top: 1.5rem; max-width: 36ch; font-size: 1.0625rem; line-height: 1.6; color: rgb(247 243 238 / .72); }
+.cq-talk__line { font-family: var(--cq-serif); font-style: italic; font-size: max(1.5rem, min(clamp(1.8rem, 1rem + 2vw, 3rem), var(--talk-h) * .055)); line-height: 1.1; }
+.cq-talk__aside { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 1.5rem 3rem; align-items: end; }
+.cq-talk__body { max-width: 36ch; font-size: 1.0625rem; line-height: 1.6; color: rgb(247 243 238 / .72); }
 
 /* ── Discovery ────────────────────────────────────────────────────────── */
 
@@ -657,13 +676,21 @@ html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
 
 /* ── Questions ────────────────────────────────────────────────────────── */
 
-.cq-ask { padding-block: var(--cq-space); background: var(--cq-cream); }
+/* Sized against the height left under the nav so the intro, the question cloud and the three
+   people underneath land in one screen. The cloud gets what is left after the people row (about 12.5rem). */
+.cq-ask {
+  --ask-h: calc(100svh - var(--cq-nav-h));
+  --ask-pad: min(var(--cq-space), var(--ask-h) * .05);
+  padding-block: var(--ask-pad); background: var(--cq-cream);
+}
+.cq-ask .cq-h2 { font-size: max(2rem, min(clamp(2.4rem, 1rem + 4.2vw, 5.6rem), var(--ask-h) * .1)); margin-top: min(1.25rem, var(--ask-h) * .02); }
+.cq-ask .cq-lede { font-size: min(clamp(1.1rem, 1rem + .4vw, 1.375rem), var(--ask-h) * .03); margin-top: min(1.5rem, var(--ask-h) * .02); }
 .cq-ask__grid {
   display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: clamp(2.5rem, 6vw, 7rem); align-items: center;
 }
-.cq-ask__hint { margin-top: 2rem; width: fit-content; color: var(--cq-accent-ink); rotate: -4deg; }
-.cq-ask__cloud { position: relative; min-height: clamp(24rem, 34vw, 32rem); }
+.cq-ask__hint { margin-top: min(2rem, var(--ask-h) * .02); width: fit-content; color: var(--cq-accent-ink); rotate: -4deg; }
+.cq-ask__cloud { position: relative; min-height: min(clamp(24rem, 34vw, 32rem), max(15rem, var(--ask-h) * .83 - 12.5rem)); }
 .cq-q {
   position: absolute;
   left: calc(var(--x) * 1%); top: calc(var(--y) * 1%);
@@ -672,7 +699,7 @@ html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
   padding: .55em 1em .6em; border-radius: 999px;
   border: 1px solid var(--cq-line); background: var(--cq-paper);
   font-family: var(--cq-serif); font-style: italic;
-  font-size: clamp(1.3rem, 1rem + 1.1vw, 2.1rem); line-height: 1.1;
+  font-size: max(1.15rem, min(clamp(1.3rem, 1rem + 1.1vw, 2.1rem), var(--ask-h) * .042)); line-height: 1.1;
   white-space: nowrap; cursor: pointer;
   box-shadow: 0 1px 0 rgb(21 19 17 / .04), 0 14px 30px -20px rgb(21 19 17 / .4);
   transition: rotate .6s var(--cq-ease), scale .6s var(--cq-ease), background-color .35s, color .35s, border-color .35s;
@@ -680,13 +707,13 @@ html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
 .cq-q:hover { rotate: 0deg; scale: 1.03; }
 .cq-q[aria-pressed='true'] { background: var(--cq-ink); color: var(--cq-paper); border-color: var(--cq-ink); }
 
-.cq-ask__result { margin-top: clamp(3rem, 6vw, 5rem); padding-top: 2rem; border-top: 1px solid var(--cq-line-strong); }
+.cq-ask__result { margin-top: min(clamp(3rem, 6vw, 5rem), var(--ask-h) * .04); padding-top: min(2rem, var(--ask-h) * .03); border-top: 1px solid var(--cq-line-strong); }
 .cq-ask__label { color: var(--cq-muted); }
 .cq-ask__label .cq-serif { color: var(--cq-ink); font-size: 1.3em; }
-.cq-ask__people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
+.cq-ask__people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin-top: min(1.5rem, var(--ask-h) * .025); }
 .cq-ask__people li {
   display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .9rem 1rem; align-items: start;
-  padding: 1.25rem; border-radius: 1rem; background: var(--cq-paper);
+  padding: min(1.25rem, var(--ask-h) * .022); border-radius: 1rem; background: var(--cq-paper);
   animation: cq-up .7s var(--cq-ease) calc(var(--i) * 80ms) both;
 }
 .cq-ask__name { font-weight: 520; }
@@ -696,18 +723,25 @@ html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
 
 /* ── Conversation ─────────────────────────────────────────────────────── */
 
-.cq-conv { padding-block: var(--cq-space); }
-.cq-conv__head .cq-h2 { max-width: 20ch; }
+/* The stage takes the full height left under the nav; the heading and steps share the column beside it,
+   so the whole section lands in one screen. */
+.cq-conv {
+  --conv-h: calc(100svh - var(--cq-nav-h));
+  --conv-pad: min(var(--cq-space), var(--conv-h) * .05);
+  padding-block: var(--conv-pad);
+}
+.cq-conv__head { margin-bottom: min(2.5rem, var(--conv-h) * .05); }
+/* 4vw keeps the heading to three lines in the narrower column. */
+.cq-conv__head .cq-h2 { font-size: max(2rem, min(4vw, 5.6rem, var(--conv-h) * .1)); margin-top: min(1.25rem, var(--conv-h) * .02); }
 .cq-conv__grid {
   display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: clamp(2rem, 6vw, 6rem); align-items: center;
-  margin-top: clamp(2.5rem, 5vw, 4.5rem);
 }
 .cq-steps { display: flex; flex-direction: column; }
 .cq-step {
   position: relative;
   display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 0 1rem;
-  padding: 1.4rem 0; text-align: left;
+  padding: min(1.4rem, var(--conv-h) * .02) 0; text-align: left;
   border: 0; border-top: 1px solid var(--cq-line); background: none;
   color: var(--cq-muted); cursor: pointer; transition: color .4s;
 }
@@ -719,7 +753,7 @@ html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
 .cq-step:hover, .cq-step[aria-selected='true'] { color: var(--cq-ink); }
 .cq-step[aria-selected='true']::before { width: 100%; }
 .cq-step__num { font: 500 .75rem/1 var(--cq-mono); padding-top: .7em; }
-.cq-step__title { font-size: clamp(1.4rem, 1rem + 1.1vw, 2.1rem); font-weight: 500; line-height: 1.15; letter-spacing: -.03em; }
+.cq-step__title { font-size: max(1.2rem, min(clamp(1.4rem, 1rem + 1.1vw, 2.1rem), var(--conv-h) * .04)); font-weight: 500; line-height: 1.15; letter-spacing: -.03em; }
 .cq-step__line {
   grid-column: 2; max-width: 34ch; max-height: 0; opacity: 0; overflow: hidden;
   font-size: 1rem; line-height: 1.5; color: var(--cq-ink-2);
@@ -727,7 +761,7 @@ html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
 }
 .cq-step[aria-selected='true'] .cq-step__line { max-height: 6rem; opacity: 1; margin-top: .5rem; }
 
-.cq-stage { position: relative; aspect-ratio: 5 / 4; border-radius: 1.25rem; overflow: hidden; background: var(--cq-sand); }
+.cq-stage { position: relative; justify-self: end; width: min(100%, (var(--conv-h) - var(--conv-pad) * 2) * 1.25); aspect-ratio: 5 / 4; border-radius: 1.25rem; overflow: hidden; background: var(--cq-sand); }
 .cq-stage__frame { position: absolute; inset: 0; animation: cq-fade .7s var(--cq-ease) both; }
 .cq-stage__frame > div { position: absolute; inset: 0; }
 
@@ -796,31 +830,54 @@ html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
   position: relative; isolation: isolate; overflow: hidden;
   display: flex; align-items: flex-end; color: #fff;
 }
-.cq-diff { min-height: max(36rem, min(100svh, 62rem)); background: #221D22; }
+/* Exactly the height left under the nav, with the title and notes scaled to match, so it lands in one screen. */
+.cq-diff {
+  --diff-h: calc(100svh - var(--cq-nav-h));
+  min-height: max(22rem, min(var(--diff-h), 62rem)); background: #221D22;
+}
+/* Vertically centred in the section, nudged slightly above the middle. */
+.cq-diff { align-items: center; }
+.cq-diff__inner { padding-block: calc(var(--diff-h) * .06) calc(var(--diff-h) * .12); }
 .cq-diff__media, .cq-final__media { position: absolute; inset: 0; z-index: -1; }
 .cq-diff__media::after, .cq-final__media::after { content: ''; position: absolute; inset: 0; pointer-events: none; }
 .cq-diff__media::after { background: linear-gradient(180deg, rgb(14 12 13 / .15) 0%, rgb(14 12 13 / 0) 35%, rgb(14 12 13 / .75) 100%); }
 :is(.cq-diff, .cq-final) .cq-ph__label { top: 1.5rem; bottom: auto; left: 50%; translate: -50% 0; text-align: center; }
-.cq-diff__inner, .cq-final__inner { padding-block: clamp(4rem, 8vw, 7rem); }
+.cq-final__inner { padding-block: clamp(4rem, 8vw, 7rem); }
 .cq-diff__title {
-  font-size: clamp(3rem, 1rem + 6.2vw, 8.5rem); font-weight: 520;
+  font-size: max(2.5rem, min(clamp(3rem, 1rem + 6.2vw, 8.5rem), var(--diff-h) * .15)); font-weight: 520;
   line-height: .95; letter-spacing: -.045em;
 }
-.cq-diff__copy { margin-top: 1.75rem; font-size: clamp(1.15rem, 1rem + .5vw, 1.5rem); line-height: 1.45; color: rgb(255 255 255 / .86); }
+.cq-diff__copy { margin-top: min(1.75rem, var(--diff-h) * .03); font-size: clamp(1.15rem, 1rem + .5vw, 1.5rem); line-height: 1.45; color: rgb(255 255 255 / .86); }
 .cq-diff__note {
-  position: absolute; top: clamp(4.5rem, 10vw, 8rem); right: var(--cq-gutter);
+  position: absolute; top: 12%; right: var(--cq-gutter);
   color: #fff; text-align: right; rotate: 4deg;
-  font-size: clamp(1.4rem, 1rem + 1.2vw, 2.3rem);
+  font-size: max(1.2rem, min(clamp(1.4rem, 1rem + 1.2vw, 2.3rem), var(--diff-h) * .05));
 }
+/* The rest scatter down the right side, clear of the title, fading a little as they go. */
+.cq-diff__note--2 { top: 36%; right: 22%; rotate: -3deg; opacity: .9; }
+.cq-diff__note--3 { top: 57%; right: calc(var(--cq-gutter) + 2%); rotate: 2deg; opacity: .8; }
+.cq-diff__note--4 { top: 77%; right: 23%; rotate: -4deg; opacity: .7; }
 
 /* ── Creators ─────────────────────────────────────────────────────────── */
 
-.cq-creator { padding-block: var(--cq-space); }
+/* Sized against the height left under the nav so the photo and the whole copy column land in one screen. */
+.cq-creator {
+  --cr-h: calc(100svh - var(--cq-nav-h));
+  --cr-pad: min(var(--cq-space), var(--cr-h) * .05);
+  padding-block: var(--cr-pad);
+}
+.cq-creator .cq-h2 {
+  font-size: max(2rem, min(clamp(2.4rem, 1rem + 4.2vw, 5.6rem), var(--cr-h) * .07));
+  margin-top: min(1.25rem, var(--cr-h) * .02);
+}
+.cq-creator .cq-lede { font-size: min(clamp(1.1rem, 1rem + .4vw, 1.375rem), var(--cr-h) * .03); margin-top: min(1.5rem, var(--cr-h) * .02); }
+.cq-creator .cq-btn { height: 3rem; }
 .cq-creator__grid {
   display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
   gap: clamp(3rem, 7vw, 8rem); align-items: center;
 }
-.cq-creator__media { position: relative; aspect-ratio: 3 / 2; }
+/* Width follows the height budget; the request card hangs 16% below the photo, so that is counted too. */
+.cq-creator__media { position: relative; width: min(100%, var(--cr-h) * 1.08); aspect-ratio: 3 / 2; }
 .cq-creator__photo { position: absolute; inset: 0; border-radius: .5rem; overflow: hidden; }
 .cq-creator__photo .cq-ph__label { top: 1rem; bottom: auto; left: auto; right: 1rem; }
 .cq-creator__price {
@@ -840,48 +897,82 @@ html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
 .cq-request__actions span { padding: .45rem .85rem; border-radius: 999px; border: 1px solid var(--cq-line-strong); font-size: .8125rem; }
 .cq-request__actions .is-yes { background: var(--cq-accent-strong); border-color: transparent; color: #fff; }
 
-.cq-creator__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 2.5rem; }
+.cq-creator__copy { display: flex; flex-direction: column; align-items: flex-start; gap: min(2.5rem, var(--cr-h) * .035); }
 .cq-creator__list { width: 100%; }
 .cq-creator__list li {
   display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 1rem;
-  padding-block: 1.1rem; border-top: 1px solid var(--cq-line);
+  padding-block: min(1.1rem, var(--cr-h) * .014); border-top: 1px solid var(--cq-line);
 }
 .cq-creator__list li:last-child { border-bottom: 1px solid var(--cq-line); }
 .cq-creator__num { font: 500 .75rem/1 var(--cq-mono); color: var(--cq-muted); padding-top: .6em; }
-.cq-creator__title { display: block; font-size: clamp(1.25rem, 1rem + .7vw, 1.6rem); font-weight: 500; letter-spacing: -.025em; }
-.cq-creator__line { display: block; margin-top: .2rem; font-size: .975rem; color: var(--cq-muted); }
+.cq-creator__title { display: block; font-size: max(1.1rem, min(clamp(1.25rem, 1rem + .7vw, 1.6rem), var(--cr-h) * .032)); font-weight: 500; line-height: 1.25; letter-spacing: -.025em; }
+.cq-creator__line { display: block; margin-top: .2rem; font-size: .875rem; color: var(--cq-muted); }
+
+/* ── Brands ───────────────────────────────────────────────────────────── */
+
+.cq-brand { padding-block: var(--cq-space); background: var(--cq-cream); }
+.cq-brand__grid {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(3rem, 7vw, 8rem); align-items: end;
+}
+.cq-brand__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1.75rem; }
+.cq-brand__list li {
+  display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 1rem;
+  padding-block: 1.25rem; border-top: 1px solid var(--cq-line);
+}
+.cq-brand__list li:last-child { border-bottom: 1px solid var(--cq-line); }
+.cq-brand__num { font: 500 .75rem/1 var(--cq-mono); color: var(--cq-muted); padding-top: .6em; }
+.cq-brand__title { display: block; font-size: clamp(1.25rem, 1rem + .7vw, 1.6rem); font-weight: 500; line-height: 1.25; letter-spacing: -.025em; }
+.cq-brand__line { display: block; margin-top: .2rem; font-size: .875rem; color: var(--cq-muted); }
+.cq-brand__creators { margin-top: 1.5rem; font-size: .9375rem; color: var(--cq-muted); }
+.cq-brand__creators a { color: var(--cq-ink); }
 
 /* ── Voices ───────────────────────────────────────────────────────────── */
 
-.cq-voices { padding-block: var(--cq-space); border-top: 1px solid var(--cq-line); }
+/* Sized against the height left under the nav so both photos and their quotes land in one screen.
+   --v-photo is that height minus the eyebrow, the quote under the photo (two lines) and its caption. */
+.cq-voices {
+  --v-h: calc(100svh - var(--cq-nav-h));
+  --v-pad: min(var(--cq-space), var(--v-h) * .05);
+  --v-fq: max(1.4rem, min(clamp(1.6rem, 1rem + 1.4vw, 2.6rem), var(--v-h) * .042));
+  --v-photo: max(10rem, var(--v-h) * .825 - var(--v-fq) * 2.16 - 2.25rem);
+  padding-block: var(--v-pad); border-top: 1px solid var(--cq-line);
+}
 .cq-voices__featured {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2rem, 4vw, 4rem); align-items: start; margin-top: 2.5rem;
+  gap: clamp(2rem, 4vw, 4rem); align-items: start; margin-top: min(2.5rem, var(--v-h) * .03);
 }
-.cq-voice__photo { aspect-ratio: 3 / 2; border-radius: .5rem; overflow: hidden; margin-bottom: 1.5rem; }
+/* 3:2 while there is height for it; on short windows it widens towards 16:9 rather than shrinking. */
+.cq-voice__photo {
+  width: min(100%, var(--v-photo) * 1.78); aspect-ratio: 3 / 2; max-height: var(--v-photo);
+  border-radius: .5rem; overflow: hidden; margin-bottom: min(1.5rem, var(--v-h) * .025);
+}
 .cq-voice blockquote p {
-  font-family: var(--cq-serif); font-size: clamp(1.4rem, 1rem + .9vw, 2rem);
-  line-height: 1.15; letter-spacing: -.01em; text-wrap: pretty;
+  font-family: var(--cq-serif); font-size: var(--v-fq);
+  line-height: 1.08; letter-spacing: -.01em; text-wrap: pretty;
 }
-.cq-voice--feature blockquote p { font-size: clamp(1.6rem, 1rem + 1.4vw, 2.6rem); line-height: 1.08; }
 .cq-voice blockquote p::before { content: '“'; color: var(--cq-accent); }
 .cq-voice blockquote p::after { content: '”'; color: var(--cq-accent); }
-.cq-voice figcaption { display: flex; align-items: center; gap: .75rem; margin-top: 1.25rem; }
-.cq-voice__name { display: block; font-size: .975rem; font-weight: 520; }
-.cq-voice__role { display: block; font-size: .875rem; color: var(--cq-muted); }
-.cq-voices__rest { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem clamp(2rem, 4vw, 4rem); margin-top: clamp(3rem, 5vw, 4.5rem); }
-.cq-voices__rest .cq-voice { padding-top: 2rem; border-top: 1px solid var(--cq-line); }
+.cq-voice figcaption { display: flex; align-items: center; gap: .75rem; margin-top: min(1.25rem, var(--v-h) * .02); }
+.cq-voice__name { font-size: .975rem; font-weight: 520; }
+.cq-voice__role { font-size: .875rem; color: var(--cq-muted); }
+.cq-voice__role::before { content: '·'; margin-inline: .5em; }
 
 /* ── Interests ────────────────────────────────────────────────────────── */
 
-.cq-int { padding-block: var(--cq-space); background: var(--cq-cream); }
-.cq-int .cq-h2 { margin-top: 0; }
-.cq-int__chips { display: flex; flex-wrap: wrap; gap: .65rem .75rem; max-width: 80rem; margin-top: clamp(2rem, 4vw, 3.5rem); }
+/* Sized against the height left under the nav so the title, every chip and the status line land in one screen. */
+.cq-int {
+  --int-h: calc(100svh - var(--cq-nav-h));
+  display: flex; align-items: center; min-height: var(--int-h);
+  padding-block: min(var(--cq-space), var(--int-h) * .06); background: var(--cq-cream);
+}
+.cq-int .cq-h2 { margin-top: 0; font-size: max(2rem, min(clamp(2.4rem, 1rem + 4.2vw, 5.6rem), var(--int-h) * .13)); }
+.cq-int__chips { display: flex; flex-wrap: wrap; gap: .65rem .75rem; margin-top: min(clamp(2rem, 4vw, 3.5rem), var(--int-h) * .05); }
 .cq-int__chip {
   display: inline-flex; align-items: center; gap: .3em;
   padding: .3em .65em .36em; border-radius: 999px;
   border: 1px solid var(--cq-line-strong); background: transparent;
-  font-size: clamp(1.5rem, 1rem + 2.2vw, 3.4rem); font-weight: 450; line-height: 1; letter-spacing: -.035em;
+  font-size: max(1.25rem, min(clamp(1.5rem, 1rem + 2vw, 3.4rem), var(--int-h) * .078)); font-weight: 450; line-height: 1; letter-spacing: -.035em;
   cursor: pointer;
   transition: background-color .35s, color .35s, border-color .35s, rotate .5s var(--cq-ease), translate .5s var(--cq-ease);
 }
@@ -892,27 +983,61 @@ html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
 .cq-int__chip svg { width: .6em; height: .6em; stroke-width: 2.5; }
 .cq-int__status {
   display: flex; flex-wrap: wrap; align-items: baseline; gap: 1rem 2rem;
-  min-height: 2rem; margin-top: 2.5rem; font-size: 1.125rem; color: var(--cq-ink-2);
+  min-height: 2rem; margin-top: min(2.5rem, var(--int-h) * .045); font-size: 1.125rem; color: var(--cq-ink-2);
 }
 .cq-int__go { font-weight: 500; }
 
 /* ── Why ──────────────────────────────────────────────────────────────── */
 
-.cq-why { padding-block: var(--cq-space); }
-.cq-why__list { margin-top: 2rem; }
-.cq-why__list li {
-  display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 4fr);
-  gap: 1rem clamp(1.5rem, 4vw, 4rem); align-items: baseline;
-  padding-block: clamp(2rem, 4vw, 3.5rem); border-top: 1px solid var(--cq-line);
+/* Sized against the height left under the nav so all three rows land in one screen. */
+.cq-why {
+  --why-h: calc(100svh - var(--cq-nav-h));
+  padding-block: min(var(--cq-space), var(--why-h) * .05);
 }
-.cq-why__list li:last-child { border-bottom: 1px solid var(--cq-line); }
-.cq-why__num { font-size: clamp(4rem, 2rem + 7vw, 10rem); font-weight: 300; line-height: .8; letter-spacing: -.06em; }
+.cq-why__list {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(.75rem, 1.4vw, 1.5rem);
+  margin-top: min(2rem, var(--why-h) * .04);
+}
+.cq-why__card {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem;
+  min-height: clamp(16rem, var(--why-h) * .74, 32rem);
+  padding: clamp(1.25rem, 2.2vw, 2.5rem);
+  border-radius: 1rem; background: var(--cq-cream);
+}
+.cq-why__card::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: var(--cq-grain); background-size: 180px;
+  mix-blend-mode: overlay; opacity: .25;
+}
+/* A soft disc in the far corner gives each card a focal point behind the number. */
+.cq-why__card::after {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  right: -18%; top: -22%; width: 70%; aspect-ratio: 1; border-radius: 50%;
+  background: var(--why-disc, var(--cq-sand));
+}
+.cq-why__card:nth-child(2) { background: var(--cq-accent-soft); --why-disc: #EBCFEF; }
+.cq-why__card:nth-child(3) {
+  background: var(--cq-ink); color: var(--cq-paper);
+  --why-disc: radial-gradient(circle at 35% 65%, rgb(199 87 217 / .55), rgb(199 87 217 / 0) 70%);
+}
+.cq-why__num {
+  font-size: max(3rem, min(clamp(4rem, 2rem + 6vw, 9rem), var(--why-h) * .2));
+  font-weight: 300; line-height: .8; letter-spacing: -.06em;
+}
 .cq-why__num::after {
   content: ''; display: inline-block; width: .09em; height: .09em; margin-left: .06em;
   border-radius: 50%; background: var(--cq-accent);
 }
-.cq-why__title { text-wrap: balance; font-size: clamp(1.6rem, 1rem + 1.6vw, 2.8rem); font-weight: 500; line-height: 1.05; letter-spacing: -.035em; }
-.cq-why__line { max-width: 34ch; font-size: 1.0625rem; line-height: 1.55; color: var(--cq-muted); }
+.cq-why__title {
+  font-size: max(1.35rem, min(clamp(1.6rem, 1rem + 1.6vw, 2.8rem), var(--why-h) * .06));
+  font-weight: 500; line-height: 1.05; letter-spacing: -.035em;
+}
+.cq-why__title em { display: block; color: var(--cq-accent-ink); }
+.cq-why__card:nth-child(3) .cq-why__title em { color: var(--cq-accent); }
+.cq-why__line { max-width: 34ch; margin-top: .9rem; font-size: 1.0625rem; line-height: 1.55; color: var(--cq-muted); }
+.cq-why__card:nth-child(3) .cq-why__line { color: rgb(247 243 238 / .72); }
 
 /* ── Final CTA ────────────────────────────────────────────────────────── */
 
@@ -941,33 +1066,65 @@ html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
 
 @media (max-width: 1023px) {
 
-  .cq-conn__media, .cq-conn__copy { grid-column: 1 / -1; }
-  .cq-conn__copy { max-width: 34rem; }
+  /* Stacked: title, photo, quote. The title and quote heights come out of the photo's budget. */
+  .cq-conn {
+    --conn-title: max(2rem, min(clamp(2.6rem, 1rem + 5vw, 6.5rem), var(--conn-h) * .11));
+    --conn-gap: min(clamp(2.5rem, 5vw, 5rem), var(--conn-h) * .06);
+    grid-template-columns: min(100%, max(11rem, var(--conn-photo) - var(--conn-title) * 2 - var(--conn-gap) - 13rem) * 1.5);
+    grid-template-rows: none; gap: var(--conn-gap) 0;
+  }
+  .cq-conn__title, .cq-conn__media, .cq-conn__copy { grid-area: auto; }
+  .cq-conn__title, .cq-conn__copy { width: calc(100vw - 2 * var(--cq-gutter)); max-width: none; }
 
-  .cq-talk__foot { grid-template-columns: 1fr; align-items: start; }
+  .cq-talk__aside { grid-template-columns: 1fr; align-items: start; }
 
+  /* No room beside the title here, so only the first two notes stay, stacked at the top. */
+  .cq-diff__note--2 { top: calc(12% + 5.5rem); right: calc(var(--cq-gutter) + 8%); }
+  .cq-diff__note--3, .cq-diff__note--4 { display: none; }
+
+  /* Stacked, the intro, questions and people cannot share one screen, so keep the normal rhythm here. */
+  .cq-ask { --ask-pad: var(--cq-space); }
   .cq-ask__grid { grid-template-columns: 1fr; }
   .cq-ask__cloud { display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; min-height: 0; }
   .cq-q { position: static; translate: none; white-space: normal; text-align: left; }
   .cq-q:nth-child(even) { align-self: flex-end; }
 
+  /* Stacked, the heading, steps and stage cannot share one screen, so keep the normal rhythm here. */
+  .cq-conv { --conv-pad: var(--cq-space); }
+  .cq-conv__head .cq-h2 { font-size: clamp(2.4rem, 1rem + 4.2vw, 5.6rem); max-width: 20ch; }
   .cq-conv__grid { grid-template-columns: 1fr; }
+  .cq-stage { width: 100%; }
 
+  /* Stacked, the photo and copy cannot share one screen, so keep the normal rhythm here. */
+  .cq-creator { --cr-pad: var(--cq-space); }
   .cq-creator__grid { grid-template-columns: 1fr; }
   .cq-creator__media { width: 100%; }
+
+  .cq-brand__grid { grid-template-columns: 1fr; }
 
 }
 
 @media (max-width: 900px) {
   .cq-ask__people { grid-template-columns: 1fr; }
-  .cq-why__list li { grid-template-columns: 1fr; }
-  .cq-why__num { font-size: 4rem; }
+  /* Cards stack, with the number beside the copy instead of above it, to save height. */
+  .cq-why__list { grid-template-columns: 1fr; gap: .75rem; }
+  .cq-why__card { flex-direction: row; justify-content: flex-start; gap: 1.1rem; min-height: 0; padding: 1.25rem; }
+  .cq-why__card::after { width: 45%; right: -12%; top: -40%; }
+  .cq-why__num { flex: none; font-size: 2.75rem; line-height: 1; }
+  .cq-why__title { font-size: 1.4rem; }
+  .cq-why__line { margin-top: .5rem; }
 }
 
 @media (max-width: 767px) {
   .cq-ph--desk { display: none; }
   .cq-ph--mob { display: block; }
 
+  /* Phone: the verbs drop under the word, leaving room for the note that hangs below it. */
+  .cq-talk {
+    --talk-word: max(6rem, min(30vw, var(--talk-h) * .36));
+    --talk-verb: max(1.6rem, min(clamp(2.2rem, 1rem + 3.4vw, 4.6rem), var(--talk-h) * .075));
+  }
+  .cq-talk__top { flex-direction: column; gap: 4.5rem; }
   .cq-talk__note { right: 0; font-size: 1.2rem; }
 
   .cq-person { width: 62vw; }
@@ -981,7 +1138,9 @@ html:not(.cq-js) .cq-strike path { stroke-dashoffset: 0; }
   .cq-request { position: relative; left: auto; bottom: auto; width: 88%; margin: -2.5rem 0 0 auto; }
   .cq-creator__price { top: -.9rem; left: auto; right: -.25rem; rotate: 5deg; }
 
-  .cq-voices__featured, .cq-voices__rest { grid-template-columns: 1fr; }
+  /* Stacked in one column the pair runs past a phone screen, so keep the normal rhythm here. */
+  .cq-voices { --v-pad: var(--cq-space); }
+  .cq-voices__featured { grid-template-columns: 1fr; }
 
   .cq-final__note--r { display: none; }
   .cq-final__note--l { display: none; }

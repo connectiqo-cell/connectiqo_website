@@ -6,7 +6,8 @@ const links = {
     { label: 'How It Works', href: '#how-it-works' },
     { label: 'Features', href: '#features' },
     { label: 'Categories', href: '#categories' },
-    { label: 'For Mentors', href: '#for-mentors' },
+    { label: 'For Creators', href: '#for-creators' },
+    { label: 'For Brands', href: '#for-brands' },
   ],
   Company: [
     { label: 'About Us', href: '#about' },

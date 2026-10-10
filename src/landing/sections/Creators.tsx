@@ -5,7 +5,7 @@ import { CREATOR_STEPS, SIGNUP_URL } from '../content'
 
 export default function Creators() {
   return (
-    <section id="for-mentors" className="cq-creator" aria-labelledby="creator-title">
+    <section id="for-creators" className="cq-creator" aria-labelledby="creator-title">
       <div className="cq-wrap cq-creator__grid">
         <div className="cq-creator__media">
           <div className="cq-creator__photo" data-reveal="image">
@@ -33,7 +33,7 @@ export default function Creators() {
             <h2 id="creator-title" className="cq-h2">
               Your audience wants more than <span className="cq-serif">content.</span>
             </h2>
-            <p className="cq-lede">Give people a chance to talk to you.</p>
+            <p className="cq-lede">Give people a chance to talk to you, and brands a way to find you.</p>
           </div>
           <ol className="cq-creator__list" data-reveal>
             {CREATOR_STEPS.map((s, i) => (

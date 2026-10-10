@@ -141,7 +141,7 @@ function LiveHero() {
         </h1>
         <p className="cq-hero__lede">
           <strong>Ask. Learn. Collaborate. Grow.</strong>
-          <span>Talk to creators, mentors and people you look up to.</span>
+          <span>Talk to creators you look up to. Team up with brands that fit.</span>
         </p>
         <div className="cq-hero__ctas">
           <a href={SIGNUP_URL} className="cq-btn cq-btn--accent">

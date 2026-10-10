@@ -5,6 +5,7 @@ import HashLink from './HashLink'
 const NAV_LINKS = [
   { href: '#categories', label: 'Categories' },
   { href: '#how-it-works', label: 'How It Works' },
+  { href: '#for-brands', label: 'For Brands' },
   { href: '#about', label: 'About Us' },
   { href: '#contact', label: 'Contact Us' },
 ]

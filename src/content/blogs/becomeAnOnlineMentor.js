@@ -24,7 +24,7 @@ export const BLOG_CTA = {
   title: 'Start Mentoring on Connectiqo',
   text: 'Set your own price, choose your own hours and start earning from what you already know. Mentors are reviewed before they go live.',
   primary: { label: 'Sign Up as a Mentor', href: SIGNUP_URL },
-  secondary: { label: 'Learn About Mentoring', hash: '#for-mentors' },
+  secondary: { label: 'Learn About Mentoring', hash: '#for-creators' },
 }
 
 export const BLOG_SECTIONS = [

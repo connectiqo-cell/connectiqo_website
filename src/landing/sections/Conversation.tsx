@@ -82,34 +82,36 @@ export default function Conversation() {
   return (
     <section id="how-it-works" className="cq-conv" aria-labelledby="conv-title">
       <div className="cq-wrap">
-        <div className="cq-conv__head" data-reveal>
-          <p className="cq-eyebrow">How it works</p>
-          <h2 id="conv-title" className="cq-h2">
-            From <span className="cq-serif">“I wish I could ask them”</span> to actually asking.
-          </h2>
-        </div>
-
         <div className="cq-conv__grid">
-          <div className="cq-steps" role="tablist" aria-label="A conversation, step by step" aria-orientation="vertical" data-reveal>
-            {STEPS.map((s, i) => (
-              <button
-                key={s.title}
-                ref={el => { tabs.current[i] = el }}
-                type="button"
-                role="tab"
-                id={`conv-tab-${i}`}
-                aria-controls="conv-panel"
-                aria-selected={step === i}
-                tabIndex={step === i ? 0 : -1}
-                className="cq-step"
-                onClick={() => setStep(i)}
-                onKeyDown={onKey}
-              >
-                <span className="cq-step__num">0{i + 1}</span>
-                <span className="cq-step__title">{s.title}</span>
-                <span className="cq-step__line">{s.line}</span>
-              </button>
-            ))}
+          <div>
+            <div className="cq-conv__head" data-reveal>
+              <p className="cq-eyebrow">How it works</p>
+              <h2 id="conv-title" className="cq-h2">
+                From <span className="cq-serif">“I wish I could ask them”</span> to actually asking.
+              </h2>
+            </div>
+
+            <div className="cq-steps" role="tablist" aria-label="A conversation, step by step" aria-orientation="vertical" data-reveal>
+              {STEPS.map((s, i) => (
+                <button
+                  key={s.title}
+                  ref={el => { tabs.current[i] = el }}
+                  type="button"
+                  role="tab"
+                  id={`conv-tab-${i}`}
+                  aria-controls="conv-panel"
+                  aria-selected={step === i}
+                  tabIndex={step === i ? 0 : -1}
+                  className="cq-step"
+                  onClick={() => setStep(i)}
+                  onKeyDown={onKey}
+                >
+                  <span className="cq-step__num">0{i + 1}</span>
+                  <span className="cq-step__title">{s.title}</span>
+                  <span className="cq-step__line">{s.line}</span>
+                </button>
+              ))}
+            </div>
           </div>
 
           <div

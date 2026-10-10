@@ -52,19 +52,19 @@ export const PHOTOS = {
   },
   'call-collab': {
     alt: '',
-    brief: 'Call card — creator in a cap, smiling, bookshelf behind',
+    brief: 'Call card — creator at his laptop, friendly look to camera, bookshelf behind',
     minWidth: 1000,
     tone: ['#D9BFAE', '#6E5448'],
   },
   'call-creator': {
     alt: '',
-    brief: 'Call card — photographer holding a camera, smiling',
+    brief: 'Call card — creator in a striped shirt, smiling to camera, at home',
     minWidth: 1000,
     tone: ['#D9BFAE', '#6E5448'],
   },
   'call-mentor': {
     alt: '',
-    brief: 'Call card — mentor resting chin on hand, warm smile',
+    brief: 'Call card — mentor at her desk, big warm smile, bookshelf behind',
     minWidth: 1000,
     tone: ['#D9BFAE', '#6E5448'],
   },

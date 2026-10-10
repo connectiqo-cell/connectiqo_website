@@ -89,6 +89,14 @@ export const CREATOR_STEPS = [
   { title: 'Get paid.', line: 'Straight to your account after every conversation.' },
 ] as const
 
+// ── Brands ──────────────────────────────────────────────────────────────
+
+export const BRAND_STEPS = [
+  { title: 'Sign up as a brand.', line: 'Tell us who you are and who you want to reach.' },
+  { title: 'Post a brief.', line: 'What you’re making, who it’s for and what you need from a creator.' },
+  { title: 'Creators apply.', line: 'Hear from the ones who want to work with you, then pick who fits.' },
+] as const
+
 // ── Testimonials ────────────────────────────────────────────────────────
 // PLACEHOLDER QUOTES. Replace with real, attributable quotes from users (with
 // written permission) before launch. Do not ship invented testimonials.
@@ -107,12 +115,14 @@ export const VOICES: Voice[] = [
 export const INTERESTS = [
   'Music', 'Business', 'Fitness', 'Design', 'Fashion', 'Technology',
   'Content', 'Startups', 'Gaming', 'Art', 'Career', 'Life',
+  'Photography', 'Finance', 'Cooking', 'Travel', 'Writing', 'Marketing',
+  'Wellness', 'Film', 'Coding', 'Languages',
 ] as const
 
 // ── Why ─────────────────────────────────────────────────────────────────
 
 export const REASONS = [
-  { title: 'People you can actually talk to.', line: 'Not a comment section. Not a DM that never gets read. A real conversation, face to face.' },
-  { title: 'Conversations that fit your life.', line: 'Twenty minutes between classes. Half an hour after work. From wherever you are.' },
-  { title: 'Connections that stay with you.', line: 'The advice sticks around. Sometimes the person does too.' },
+  { lead: 'People you can', em: 'actually talk to.', line: 'Not a comment section. Not a DM that never gets read. A real conversation, face to face.' },
+  { lead: 'Conversations that', em: 'fit your life.', line: 'Twenty minutes between classes. Half an hour after work. From wherever you are.' },
+  { lead: 'Connections that', em: 'stay with you.', line: 'The advice sticks around. Sometimes the person does too.' },
 ] as const

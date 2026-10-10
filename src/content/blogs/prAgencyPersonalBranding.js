@@ -24,7 +24,7 @@ export const BLOG_CTA = {
   title: 'Build Your Personal Brand With Expert Guidance',
   text: 'Get 1:1 advice from practitioners in marketing, content and PR — or share your own expertise as a mentor and grow your brand while you earn.',
   primary: { label: 'Join Connectiqo', href: SIGNUP_URL },
-  secondary: { label: 'Become a Mentor', hash: '#for-mentors' },
+  secondary: { label: 'Become a Mentor', hash: '#for-creators' },
 }
 
 export const BLOG_SECTIONS = [
