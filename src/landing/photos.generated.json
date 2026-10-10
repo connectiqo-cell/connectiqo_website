@@ -1,31 +1,36 @@
 {
   "call-collab": {
-    "width": 363,
-    "height": 484,
-    "widths": [
-      363
-    ],
-    "color": "rgb(24 24 24)",
-    "lqip": "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAABwBQCdASoYACAAPtFao02oJaMiN+gBABoJQBWGZJdACypubvc79R/I0XaFphauWVl7J7QAAOAw+0f2F7YwnX/qhmKY/KMBGXYVn9O/jBBQsqGn3ou7S59uM1/X/XmpTHTV49m9Z/2pKhQmSvGp18DRXQ4GhVeLnPoKFMAA"
-  },
-  "call-creator": {
-    "width": 670,
-    "height": 893,
+    "width": 828,
+    "height": 1104,
     "widths": [
       480,
-      670
+      768,
+      828
     ],
-    "color": "rgb(8 8 8)",
-    "lqip": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAACQBQCdASoYACAAPu1gpk8ppSMiMBgMATAdiUAXZfQAG9wcQyGDEjt873rtvJRdD0oCWx+6QAD+qKCnr+ZV+xsRqmb17UtK2WLaOb87qsY67MeWo7iyVl1z750cAfrmcviDlJE4qB7OfU7f/e2chxsJ89uRPg+0ogEzqGw8Udixz2UbfuYUnoYNWOHK1c7fYgDARIAAAAA="
+    "color": "rgb(24 24 40)",
+    "lqip": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAAAQBQCdASoYACAAPu1wrVGppiQiqAqpMB2JQBadAeigtrB8uM0lgxTWxy1gVuwbH/8AAP2v91JkITnYMEF99baSwrcRXXF53kODhdZwdAYhKRfXOJnlXmrwuYHSqLOlmneQSE6OLVzkmLPk9JW5EsLghDXoP2a3+Y003RXV1TzfJ1WiFdc7jEOrKAgAAAAA"
+  },
+  "call-creator": {
+    "width": 828,
+    "height": 1104,
+    "widths": [
+      480,
+      768,
+      828
+    ],
+    "color": "rgb(168 152 136)",
+    "lqip": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAABwBQCdASoYACAAPu1kqU2ppaOiMBgMATAdiWQAqPQvHEv8SM4po1406bAwKZW9JW8KP/YAAPxa3bNB+LWW184ZFE13ERaUl5dx85gNYO6P23iy/u8vz7KxwRNHnDHh4Xk3S6CqsFd4k9OL51wmCN5tOsKAkDf/Y8BwHpRkuv/9eO4urDXgAA=="
   },
   "call-mentor": {
-    "width": 207,
-    "height": 276,
+    "width": 828,
+    "height": 1104,
     "widths": [
-      207
+      480,
+      768,
+      828
     ],
-    "color": "rgb(24 24 24)",
-    "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAADwBQCdASoYACAAPu1gq02ppSQiMBgMATAdiWQAwoANGY4BF5LZqDOJrJUSMUegedW05XN5u3UpQADbU9Rzh4rQvkdvIARGXZHT7n13WCJlYguWaYV3ScbErU4M0dvu477G4S09FswtdmPTXBFPBOWnsls3S2iPZp4YBsrzYpYIQU+BDVlJAAAA"
+    "color": "rgb(8 8 8)",
+    "lqip": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAACQBQCdASoYACAAPu1mrU6ppaSiKA1RMB2JZACsAA3yqTxFavyyCItQA+GRRX+j37WQl7PiMAD8voRfahrX0O4TehZLBmBNwJJfP1tqn+XTN+Y9a8eyrj1nDa1RpBTBslj09jkddtX46FoeTBOXX5KaQIlxSXSH0kJYO91NHWicIwaGNaIYHwEAM2gAAA=="
   },
   "call-music": {
     "width": 342,

@@ -14,6 +14,7 @@ import Questions from './sections/Questions'
 import Conversation from './sections/Conversation'
 import DifferentInternet from './sections/DifferentInternet'
 import Creators from './sections/Creators'
+import Brands from './sections/Brands'
 import Voices from './sections/Voices'
 import Interests from './sections/Interests'
 import Why from './sections/Why'
@@ -41,6 +42,7 @@ export default function Landing() {
       <Conversation />
       <DifferentInternet />
       <Creators />
+      <Brands />
       <Voices />
       <Interests />
       <Why />

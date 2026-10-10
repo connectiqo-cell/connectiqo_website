@@ -8,10 +8,14 @@ export default function Why() {
         <h2 id="why-title" className="cq-eyebrow">Why Connectiqo</h2>
         <ol className="cq-why__list">
           {REASONS.map((r, i) => (
-            <li key={r.title} data-reveal style={{ '--d': i } as CSSProperties}>
+            <li key={r.lead} className="cq-why__card" data-reveal style={{ '--d': i } as CSSProperties}>
               <span className="cq-why__num" aria-hidden="true">0{i + 1}</span>
-              <h3 className="cq-why__title">{r.title}</h3>
-              <p className="cq-why__line">{r.line}</p>
+              <div>
+                <h3 className="cq-why__title">
+                  {r.lead} <em className="cq-serif">{r.em}</em>
+                </h3>
+                <p className="cq-why__line">{r.line}</p>
+              </div>
             </li>
           ))}
         </ol>

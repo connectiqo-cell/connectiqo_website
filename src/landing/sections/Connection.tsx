@@ -18,17 +18,15 @@ export default function Connection() {
         Real conversations.
       </h2>
 
-      <div className="cq-conn__grid">
-        <figure className="cq-conn__media" data-reveal="image">
-          <Photo id="connection" sizes="(max-width: 1023px) 100vw, 66vw" />
-        </figure>
+      <figure className="cq-conn__media" data-reveal="image">
+        <Photo id="connection" sizes="(max-width: 1023px) 100vw, 66vw" />
+      </figure>
 
-        <div className="cq-conn__copy" data-reveal style={{ '--d': 2 } as CSSProperties}>
-          <p className="cq-quote">
-            Sometimes one conversation is enough to change the way you see something.
-          </p>
-          <p className="cq-hand cq-conn__note">— you’ll know it when it happens</p>
-        </div>
+      <div className="cq-conn__copy" data-reveal style={{ '--d': 2 } as CSSProperties}>
+        <p className="cq-quote">
+          Sometimes one conversation is enough to change the way you see something.
+        </p>
+        <p className="cq-hand cq-conn__note">— you’ll know it when it happens</p>
       </div>
     </section>
   )

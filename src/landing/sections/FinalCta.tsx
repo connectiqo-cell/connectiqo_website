@@ -23,6 +23,7 @@ export default function FinalCta() {
         <div className="cq-final__ctas" data-reveal>
           <a href={SIGNUP_URL} className="cq-btn cq-btn--accent">Get started <ArrowRight aria-hidden="true" /></a>
           <a href="#categories" className="cq-btn cq-btn--ghost-light">Explore people</a>
+          <a href="#for-brands" className="cq-btn cq-btn--ghost-light">I’m a brand</a>
         </div>
         <p className="cq-final__contact">
           Questions? <a className="cq-link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>

@@ -10,7 +10,7 @@ const INDEXABLE_PATHS = ['/', '/privacy', '/terms', '/cookies', '/blog', ...BLOG
 // Defaults must match the tags in index.html — used to restore them when
 // leaving a page that overrides title/description (e.g. a blog post).
 const DEFAULT_TITLE = 'Connectiqo — Real people. Closer.'
-const DEFAULT_DESCRIPTION = 'Talk to the people you look up to. Discover meaningful 1-on-1 conversations with creators, experts and people shaping the things you care about.'
+const DEFAULT_DESCRIPTION = 'Talk to the people you look up to in 1-on-1 conversations with creators and experts. Brands post a brief, and creators apply to collaborate.'
 
 // Per-page title/description overrides. Add an entry here for any indexable
 // page whose content differs from the homepage defaults (e.g. blog posts).

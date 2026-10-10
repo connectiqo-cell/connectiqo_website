@@ -29,6 +29,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ── Navbar ──────────────────────────────────────── */
+/* Colours and type follow the landing page palette (paper, ink, orchid accent) in landing.css. */
 .site-header {
   position: fixed;
   top: 0; left: 0;
@@ -36,41 +37,42 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1000;
   background: transparent;
   padding: 0.5rem 0;
+  font-family: 'Geist Variable', var(--font-body);
   transition: background 0.3s;
 }
 .site-header.scrolled {
-  background: rgba(255,255,255,0.95);
+  background: rgba(247,243,238,0.92);
   backdrop-filter: blur(12px);
-  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 0 rgba(21,19,17,0.08), 0 8px 24px -18px rgba(21,19,17,0.35);
 }
-.logo-text { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800; color: var(--text-color); text-decoration: none; }
+.logo-text { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Geist Variable', var(--font-heading); font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; color: #151311; text-decoration: none; }
 .logo-mark { height: 34px; width: auto; }
-.logo-accent { color: var(--accent-purple); }
-.nav-link { font-weight: 500; color: var(--text-color) !important; }
-.nav-link:hover { color: var(--accent-purple) !important; }
+.logo-accent { color: #A63CBA; }
+.nav-link { font-weight: 500; color: #151311 !important; }
+.nav-link:hover { color: #8E2BA1 !important; }
 .btn-contact {
-  background: var(--accent-purple);
+  background: #A63CBA;
   color: #fff !important;
   padding: 0.5rem 1.2rem;
   border-radius: 50px;
   font-weight: 600;
 }
-.btn-contact:hover { background: #1a1a1a; }
+.btn-contact:hover { background: #151311; }
 .btn-login {
-  color: var(--text-color) !important;
+  color: #151311 !important;
   padding: 0.5rem 1.2rem;
-  border: 1px solid #e0e0e0;
+  border: 1px solid rgba(21,19,17,0.24);
   border-radius: 50px;
   font-weight: 600;
 }
-.btn-login:hover { border-color: var(--accent-purple); color: var(--accent-purple) !important; }
+.btn-login:hover { border-color: #C757D9; color: #8E2BA1 !important; }
 .lang-pill {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   font-size: 0.85rem;
   font-weight: 500;
-  color: #666;
+  color: #6B645C;
   cursor: default;
 }
 
@@ -181,6 +183,82 @@ h1, h2, h3, h4, h5, h6 {
   border-left: 4px solid var(--accent-purple);
   border-radius: 12px;
 }
+/* Cards use the landing page palette (paper, cream, sand, ink, orchid accent) from landing.css. */
+.blog-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.25rem; margin: 1.25rem 0 2rem; }
+/* The solid shadow under each card is its "edge"; on hover the card tilts and lifts off it. */
+.blog-card-mini {
+  --card-edge: #E4DACD;
+  position: relative; overflow: hidden;
+  padding: 1.5rem 1.35rem 1.4rem;
+  background: #fff;
+  border: 1px solid rgb(21 19 17 / .12); border-radius: 18px;
+  box-shadow: 0 6px 0 var(--card-edge), 0 18px 30px -18px rgb(21 19 17 / .35);
+  transform: perspective(900px) rotateX(0) rotateY(0) translateY(0);
+  transition: transform .35s cubic-bezier(.2, .7, .1, 1), box-shadow .35s cubic-bezier(.2, .7, .1, 1);
+}
+.blog-card-mini:hover {
+  transform: perspective(900px) rotateX(5deg) rotateY(-4deg) translateY(-6px);
+  box-shadow: 0 12px 0 var(--card-edge), 0 34px 40px -20px rgb(21 19 17 / .45);
+}
+.blog-card-mini:nth-child(even):hover { transform: perspective(900px) rotateX(5deg) rotateY(4deg) translateY(-6px); }
+.blog-card-mini-icon {
+  display: grid; place-items: center; width: 2.9rem; height: 2.9rem; margin-bottom: 1.1rem;
+  border-radius: 14px; color: #fff;
+  background: linear-gradient(160deg, #D773E6, #A63CBA);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .45), 0 4px 0 #8E2BA1, 0 10px 14px -6px rgb(142 43 161 / .55);
+}
+.blog-card-mini-icon svg { width: 1.3rem; height: 1.3rem; }
+.blog-card-mini h3 { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.4rem; color: #151311; }
+.blog-card-mini p { color: #6B645C; font-size: 0.95rem; line-height: 1.6; margin: 0; }
+.blog-card-mini ul { list-style: none; margin: 0.75rem 0 0; padding: 0; color: #2E2A26; font-size: 0.95rem; line-height: 1.5; }
+.blog-card-mini li { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.6rem; }
+.blog-card-mini li:last-child { margin-bottom: 0; }
+.blog-card-mini li svg { flex: none; width: 1.15rem; height: 1.15rem; margin-top: 0.15rem; padding: 0.15rem; border-radius: 50%; color: #fff; background: #A63CBA; stroke-width: 3; }
+/* Numbered steps: a large faded number sits behind the top corner of each card. */
+.blog-card-mini-num {
+  position: absolute; top: -0.9rem; right: 0.6rem; z-index: 0;
+  font-size: 5.5rem; font-weight: 700; line-height: 1; letter-spacing: -0.05em;
+  color: #F4E4F6; text-shadow: 0 3px 0 #E9CDED;
+  pointer-events: none;
+}
+.blog-cards--numbered .blog-card-mini > :not(.blog-card-mini-num) { position: relative; z-index: 1; }
+/* "Worth joining" in soft orchid, "Red flags" in ink — the same pairing as the landing page's Why cards. */
+.blog-card-mini--good { --card-edge: #E4C6E9; background: #F4E4F6; border-color: #E4C6E9; }
+.blog-card-mini--bad { --card-edge: #000; background: #151311; border-color: #151311; }
+.blog-card-mini--bad h3 { color: #F7F3EE; }
+.blog-card-mini--bad ul { color: rgb(247 243 238 / .8); }
+.blog-card-mini--bad .blog-card-mini-icon { background: linear-gradient(160deg, #4A433D, #2E2A26); box-shadow: inset 0 1px 0 rgb(255 255 255 / .2), 0 4px 0 #000, 0 10px 14px -6px rgb(0 0 0 / .6); color: #C757D9; }
+.blog-card-mini--bad li svg { background: #C757D9; color: #151311; }
+@media (prefers-reduced-motion: reduce) {
+  .blog-card-mini { transition: none; }
+  .blog-card-mini:hover, .blog-card-mini:nth-child(even):hover { transform: none; }
+}
+
+/* A post with `theme: 'landing'` in its meta takes the landing page's colours and type. */
+.blog-page--landing { background: #F7F3EE; font-family: 'Geist Variable', var(--font-body); color: #151311; }
+.blog-page--landing .blog-back { color: #8E2BA1; }
+.blog-page--landing .blog-meta { color: #6B645C; }
+.blog-page--landing .blog-title { font-family: inherit; font-weight: 600; letter-spacing: -0.035em; line-height: 1.1; }
+.blog-page--landing .blog-cover { box-shadow: 0 8px 0 #E4DACD, 0 30px 40px -24px rgb(21 19 17 / .4); }
+.blog-page--landing .blog-section { border-top-color: rgb(21 19 17 / .12); }
+.blog-page--landing .blog-section h2 { font-family: inherit; font-size: 1.7rem; font-weight: 600; letter-spacing: -0.03em; }
+.blog-page--landing :is(.blog-h3, .blog-card-mini h3, .blog-callout h3) { font-family: inherit; }
+.blog-page--landing .blog-h3 { color: #151311; font-weight: 600; }
+.blog-page--landing :is(.blog-p, .blog-ul) { color: #2E2A26; }
+.blog-page--landing .blog-callout {
+  background: #F4E4F6; border: 1px solid #E4C6E9; border-left: 4px solid #C757D9;
+  box-shadow: 0 6px 0 #E4C6E9, 0 18px 30px -18px rgb(142 43 161 / .4);
+}
+.blog-page--landing .blog-callout p { color: #2E2A26; }
+.blog-page--landing .blog-cta { background: #151311; border-color: #151311; box-shadow: 0 8px 0 #000, 0 30px 40px -22px rgb(21 19 17 / .6); }
+.blog-page--landing .blog-cta h2 { font-family: inherit; font-weight: 600; letter-spacing: -0.03em; color: #F7F3EE; }
+.blog-page--landing .blog-cta p { color: rgb(247 243 238 / .78); }
+.blog-page--landing .blog-cta .btn-contact:hover { background: #C757D9; }
+.blog-page--landing .blog-cta .btn-login { color: #F7F3EE !important; border-color: rgb(247 243 238 / .45); }
+.blog-page--landing .blog-cta .btn-login:hover { color: #151311 !important; background: #F7F3EE; border-color: #F7F3EE; }
+/* Buttons sit on a darker edge and press down into it. */
+.blog-page--landing :is(.blog-callout, .blog-cta) .btn-contact { box-shadow: 0 4px 0 #6F1F7E; transition: transform .15s, box-shadow .15s, background .2s; }
+.blog-page--landing :is(.blog-callout, .blog-cta) .btn-contact:active { transform: translateY(3px); box-shadow: 0 1px 0 #6F1F7E; }
 .blog-callout h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
 .blog-callout p { color: #444; font-size: 1rem; line-height: 1.7; margin-bottom: 1rem; }
 @media (max-width: 576px) {

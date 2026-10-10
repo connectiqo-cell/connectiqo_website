@@ -8,6 +8,7 @@ import * as brandCollaboration from './brandCollaboration'
 import * as onlineConnection from './onlineConnection'
 import * as prAgencyPersonalBranding from './prAgencyPersonalBranding'
 import * as becomeAnOnlineMentor from './becomeAnOnlineMentor'
+import * as whatsappGroupBrandCollaborations from './whatsappGroupBrandCollaborations'
 
 const toPost = mod => ({ meta: mod.BLOG_META, sections: mod.BLOG_SECTIONS, cta: mod.BLOG_CTA })
 
@@ -18,6 +19,7 @@ export const BLOG_POSTS = [
   onlineConnection,
   prAgencyPersonalBranding,
   becomeAnOnlineMentor,
+  whatsappGroupBrandCollaborations,
 ].map(toPost)
 
 export const getPostBySlug = slug => BLOG_POSTS.find(post => post.meta.slug === slug)
